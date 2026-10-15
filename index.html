@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Aqal: Quran Grammar</title>
-<meta name="description" content="Learn the Arabic grammar of the Quran in 5-minute lessons. Coming soon to Android." />
+<meta name="description" content="You can read the Quran in Arabic. Now understand it: the grammar of the Quran in 5-minute lessons. Coming soon to Android." />
 <meta name="theme-color" content="#0B7F62" />
 <link rel="icon" href="img/icon.png" />
 <meta property="og:title" content="Aqal: Quran Grammar" />
@@ -57,6 +57,10 @@
   .hero h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1.04; }
   .hero h1 em { font-style: normal; color: var(--brand); }
   .hero p { font-size: 20px; color: var(--muted); max-width: 30ch; margin: 20px 0 30px; }
+  .ticks { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 8px; font-size: 20px; font-weight: 700; }
+  .ticks span { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; margin-right: 10px; color: #fff; font-size: 16px; }
+  .ticks .yes { background: var(--brand); }
+  .ticks .no { background: #C8463C; }
   .phone { justify-self: center; width: min(340px, 80vw); border-radius: 38px; padding: 10px; background: var(--fg); box-shadow: 0 30px 70px -30px rgba(17,22,51,.55); }
   .phone img { display: block; width: 100%; border-radius: 30px; }
 
@@ -133,8 +137,12 @@
 
   <header class="hero">
     <div class="rise">
-      <h1>Understand the Quran you <em>already read.</em></h1>
-      <p>The Arabic grammar of the Quran, in 5-minute lessons. Coming soon to Android.</p>
+      <h1>You can read the Quran. <em>Now understand it.</em></h1>
+      <ul class="ticks">
+        <li><span class="yes">✓</span> You read the Arabic</li>
+        <li><span class="no">✗</span> The meaning passes you by</li>
+      </ul>
+      <p>Aqal teaches the grammar of the Quran, one 5-minute lesson at a time. Coming soon to Android.</p>
       <a class="btn" href="#join">Join the waiting list</a>
     </div>
     <div class="phone rise"><img src="img/ayat.png" alt="Aqal's My Ayat screen: an Ayah from Surah Al-'Ankabut with each word coloured by its family" /></div>
