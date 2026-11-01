@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Aqal</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .button { display: inline-block; background: #0B7F62; color: #fff; text-decoration: none; font-weight: 700; padding: 14px 28px; border-radius: 14px; }
+    @media (prefers-color-scheme: dark) { .button { background: #33C99A; color: #06201A; } }
+  </style>
+  <!-- Where the sign-up and password emails land (owner 2026-11-01: the link used to open an empty page and pause before
+       the app). Supabase confirms the email first, then sends the browser here with ?to=<the app's own link>&code=...
+       On a phone this page says so and opens the app; on a computer it says to carry on in the app. Only links into
+       the Aqal app (aqal://, or Expo's exp:// while testing) are followed. -->
+</head>
+<body>
+  <main>
+    <p><a href="../">Aqal: Quran Grammar</a></p>
+    <h1 id="title">Email confirmed ✓</h1>
+    <p id="line">Opening Aqal…</p>
+    <p><a id="open" class="button" href="#" hidden>Open Aqal</a></p>
+    <p id="help" hidden>If Aqal doesn't open, open it yourself and log in with this email.</p>
+  </main>
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search);
+      var h = new URLSearchParams(location.hash.slice(1));
+      var to = q.get('to') || '';
+      var code = q.get('code');
+      var err = q.get('error_description') || h.get('error_description');
+      var reset = /new-password/.test(to);
+      var $ = function (id) { return document.getElementById(id); };
+      var show = function (id) { $(id).hidden = false; };
+
+      if (err) {
+        $('title').textContent = "That link didn't work";
+        $('line').textContent = err.replace(/\+/g, ' ') + '. Links work once and expire after a day: ask for a new one in the app.';
+        return;
+      }
+      if (reset) {
+        $('title').textContent = 'Choose a new password';
+        $('line').textContent = 'Opening Aqal…';
+      }
+      var safe = /^(aqal|exps?):\/\//.test(to);
+      var phone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (!safe || !code || !phone) {
+        $('line').textContent = reset
+          ? 'Open this email on the phone that has Aqal, and tap the link there.'
+          : 'Your email is confirmed. Open Aqal on your phone and log in with this email.';
+        return;
+      }
+      var link = to + (to.indexOf('?') < 0 ? '?' : '&') + 'code=' + encodeURIComponent(code);
+      $('open').href = link;
+      show('open');
+      setTimeout(function () { location.href = link; }, 400);
+      setTimeout(function () { show('help'); }, 2500);
+    })();
+  </script>
+</body>
+</html>
