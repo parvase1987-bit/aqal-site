@@ -138,6 +138,14 @@
     .join .box { grid-template-columns: 1fr; padding: 28px; }
     .row { flex-direction: column; }
   }
+  /* narrow phones (320px): the longer brand name and the waiting-list button share one row */
+  @media (max-width: 380px) {
+    .wrap { padding: 0 16px; }
+    nav { gap: 10px; }
+    .brand { font-size: 18px; gap: 8px; min-width: 0; }
+    .brand img { width: 30px; height: 30px; }
+    nav .btn { min-height: 44px; padding: 0 14px; font-size: 14px; }
+  }
 </style>
 </head>
 <body>
