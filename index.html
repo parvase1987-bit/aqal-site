@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://aqal.academy/img/share.png" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Aqal Academy","alternateName":["Aqal","aqal.academy"],"url":"https://aqal.academy/"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Aqal Academy","alternateName":"Aqal","url":"https://aqal.academy/","logo":"https://aqal.academy/img/icon.png","email":"aqal.app.academy@gmail.com"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Aqal Academy","alternateName":"Aqal","url":"https://aqal.academy/","logo":"https://aqal.academy/img/icon.png","email":"aqal.app.academy@gmail.com","sameAs":["https://www.instagram.com/aqal.academy/","https://www.facebook.com/aqal.academy/","https://www.youtube.com/@aqal.academy","https://www.tiktok.com/@aqal_academy"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"Aqal","alternateName":"Aqal Academy","url":"https://aqal.academy/","applicationCategory":"EducationalApplication","operatingSystem":"Android, iOS","description":"Quranic Arabic grammar in 5-minute lessons, word meanings with spaced review, and every Ayah word by word.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Lessons 1 to 7 free; Premium for the rest"}}</script>
 <!-- aqal.academy landing page (owner 2026-10-14). Real app screenshots in img/ (taken from the app's web build).
      The waiting-list form adds an email to Supabase public.waitlist (insert-only; migration 20261014130000).
@@ -118,6 +118,8 @@
   .hint.ok { color: var(--brand); font-weight: 700; } .hint.bad { color: var(--bad); font-weight: 700; }
 
   footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 15px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer .social { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; }
+  footer .social a { display: inline-block; padding: 10px 0; font-weight: 700; }
 
   /* gentle entrances: the page reads top to bottom */
   @media (prefers-reduced-motion: no-preference) {
@@ -233,6 +235,14 @@
     <span>Aqal Academy</span>
     <span><a href="privacy/">Privacy policy</a> &nbsp; <a href="terms/">Terms of use</a> &nbsp; <a href="delete-account/">Delete your account</a></span>
     <span>Questions? <a href="mailto:aqal.app.academy@gmail.com">aqal.app.academy@gmail.com</a></span>
+    <nav class="social" aria-label="Aqal Academy on social media">
+      <span>Follow us:</span>
+      <a href="https://www.instagram.com/aqal.academy/" rel="me noopener" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/aqal.academy/" rel="me noopener" target="_blank">Facebook</a>
+      <a href="https://www.youtube.com/@aqal.academy" rel="me noopener" target="_blank">YouTube</a>
+      <a href="https://www.tiktok.com/@aqal_academy" rel="me noopener" target="_blank">TikTok</a>
+      <a href="https://discord.gg/aW6V7PMSh" rel="noopener" target="_blank">Discord</a>
+    </nav>
   </footer>
 </div>
 
