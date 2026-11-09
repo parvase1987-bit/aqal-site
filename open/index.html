@@ -31,6 +31,9 @@
       var code = q.get('code');
       var err = q.get('error_description') || h.get('error_description');
       var reset = /new-password/.test(to);
+      // phones get the pass itself after "#": only a password reset needs it, and it never stays in the address or history
+      var pass = reset && h.get('access_token') ? location.hash.slice(1) : '';
+      if (h.get('access_token')) history.replaceState(null, '', location.pathname + location.search);
       var $ = function (id) { return document.getElementById(id); };
       var show = function (id) { $(id).hidden = false; };
 
@@ -45,13 +48,14 @@
       }
       var safe = /^(aqal|exps?):\/\//.test(to);
       var phone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (!safe || !code || !phone) {
+      if (!safe || (!code && !pass) || !phone) {
         $('line').textContent = reset
           ? 'Open this email on the phone that has Aqal, and tap the link there.'
           : 'Your email is confirmed. Open Aqal on your phone and log in with this email.';
         return;
       }
-      var link = to + (to.indexOf('?') < 0 ? '?' : '&') + 'code=' + encodeURIComponent(code);
+      var link = pass ? to + '#' + pass : to + (to.indexOf('?') < 0 ? '?' : '&') + 'code=' + encodeURIComponent(code);
+      if (reset) $('help').textContent = "If Aqal doesn't open, ask for a new link in the app.";
       $('open').href = link;
       show('open');
       setTimeout(function () { location.href = link; }, 400);
