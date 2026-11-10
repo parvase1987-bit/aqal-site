@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Aqal: email settings</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .button { display: inline-block; background: #0B7F62; color: #fff; font: inherit; font-weight: 700; border: 0; padding: 14px 28px; border-radius: 14px; cursor: pointer; }
+    .button:disabled { opacity: .6; cursor: default; }
+    @media (prefers-color-scheme: dark) { .button { background: #33C99A; color: #06201A; } }
+  </style>
+  <!-- Unsubscribe from Aqal's reminder or news emails (owner 2026-11-10). The email's link brings ?u=&l=&t= here; only the
+       button unsubscribes (mail scanners open every link and must not), by POSTing them to the Edge Function
+       email-unsubscribe, which checks the signed token. Mail apps' own one-click unsubscribe calls the function directly. -->
+</head>
+<body>
+  <main>
+    <p><a href="../">Aqal: Quran Grammar</a></p>
+    <h1 id="title">Email settings</h1>
+    <p id="line"></p>
+    <p><button id="go" class="button" hidden></button></p>
+  </main>
+  <script>
+    (function () {
+      var FN = 'https://kxpxtncfudxosgyvilxv.supabase.co/functions/v1/email-unsubscribe';
+      var q = new URLSearchParams(location.search);
+      var u = q.get('u') || '', l = q.get('l') || '', t = q.get('t') || '';
+      var $ = function (id) { return document.getElementById(id); };
+      var what = l === 'nudges' ? 'reminder emails' : l === 'marketing' ? 'news emails' : '';
+      if (!u || !t || !what) {
+        $('line').textContent = "This link isn't complete. You can turn emails off in the Aqal app: Settings.";
+        return;
+      }
+      $('line').textContent = 'Stop getting Aqal’s ' + what + '? You can turn them back on in the app: Settings.';
+      var go = $('go');
+      go.textContent = 'Unsubscribe from ' + what;
+      go.hidden = false;
+      go.onclick = function () {
+        go.disabled = true;
+        fetch(FN + '?' + new URLSearchParams({ u: u, l: l, t: t }), { method: 'POST' })
+          .then(function (r) { return r.ok; }, function () { return false; })
+          .then(function (ok) {
+            $('title').textContent = ok ? 'Done' : 'That didn’t work';
+            $('line').textContent = ok
+              ? 'You won’t get Aqal’s ' + what + ' any more.'
+              : 'Please try again later, or turn them off in the app: Settings.';
+            go.hidden = ok;
+            go.disabled = false;
+          });
+      };
+    })();
+  </script>
+</body>
+</html>
