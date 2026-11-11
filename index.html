@@ -104,6 +104,19 @@
   .book .copy { align-self: center; padding-bottom: 40px; max-width: 42ch; }
   .book img { max-width: 360px; justify-self: center; }
 
+  /* plans */
+  .plans { padding: 30px 0 20px; }
+  .plans h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
+  .plans > p { color: var(--muted); margin: 12px 0 24px; max-width: 60ch; }
+  .tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .tier { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .tier.pop { border: 2px solid var(--brand); }
+  .tier h3 { margin: 0; font-size: 18px; }
+  .tier .price { font-size: 32px; font-weight: 800; margin: 8px 0 4px; }
+  .tier .per { color: var(--muted); font-size: 15px; margin: 0; }
+  .tier .tag { display: inline-block; background: var(--brand-soft); color: var(--brand-deep); font-weight: 700; font-size: 13px; border-radius: 999px; padding: 2px 10px; margin-bottom: 8px; }
+  .plans .small { color: var(--muted); font-size: 14px; margin-top: 16px; }
+
   /* waiting list */
   .join { padding: 30px 0 90px; }
   .join .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
@@ -138,6 +151,7 @@
     .book { grid-template-columns: 1fr; padding: 28px 28px 0; }
     .book .copy { padding-bottom: 0; }
     .join .box { grid-template-columns: 1fr; padding: 28px; }
+    .tiers { grid-template-columns: 1fr 1fr; }
     .row { flex-direction: column; }
   }
   /* narrow phones (320px): the longer brand name and the waiting-list button share one row */
@@ -211,6 +225,19 @@
 
 <div class="wrap">
 
+  <section class="plans" id="plans">
+    <h2>Plans</h2>
+    <p>Lessons 1 to 7 are free, with no card needed. Premium opens every lesson after that.</p>
+    <div class="tiers">
+      <div class="tier"><h3>Free</h3><p class="price">$0</p><p class="per">Lessons 1 to 7, for as long as you like</p></div>
+      <div class="tier"><h3>Monthly</h3><p class="price">$4.99</p><p class="per">per month</p></div>
+      <div class="tier pop"><span class="tag">Most popular</span><h3>Every 3 months</h3><p class="price">$12.99</p><p class="per">per 3 months</p></div>
+      <div class="tier"><h3>Yearly</h3><p class="price">$39.99</p><p class="per">per year</p></div>
+    </div>
+    <p class="small">Prices in US dollars. In the app they're shown in your currency and may be lower in some countries.
+      Premium renews automatically; cancel any time. Bought on the web? <a href="refund/">Full refund within 14 days</a>, no questions asked.</p>
+  </section>
+
   <section class="join" id="join">
     <div class="box rise">
       <div>
@@ -233,7 +260,7 @@
 <div class="wrap">
   <footer>
     <span>Aqal Academy</span>
-    <span><a href="privacy/">Privacy policy</a> &nbsp; <a href="terms/">Terms of use</a> &nbsp; <a href="delete-account/">Delete your account</a></span>
+    <span><a href="privacy/">Privacy policy</a> &nbsp; <a href="terms/">Terms of use</a> &nbsp; <a href="refund/">Refund policy</a> &nbsp; <a href="delete-account/">Delete your account</a></span>
     <span>Questions? <a href="mailto:aqal.app.academy@gmail.com">aqal.app.academy@gmail.com</a></span>
     <nav class="social" aria-label="Aqal Academy on social media">
       <span>Follow us:</span>
