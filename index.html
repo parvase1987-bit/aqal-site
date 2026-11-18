@@ -115,6 +115,13 @@
   .tier .tag { display: inline-block; background: var(--brand-soft); color: var(--brand-deep); font-weight: 700; font-size: 13px; border-radius: 999px; padding: 2px 10px; margin-bottom: 8px; }
   .plans .small { color: var(--muted); font-size: 14px; margin-top: 16px; }
 
+  /* sources: where the text and the numbers come from */
+  .sources { padding: 10px 0 30px; }
+  .sources h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
+  .sources p { color: var(--muted); margin: 12px 0 0; max-width: 60ch; }
+  .sources ul { color: var(--muted); margin: 14px 0 0; padding-left: 22px; max-width: 70ch; }
+  .sources li { margin: 6px 0; }
+  .sources b { color: var(--fg); }
   /* waiting list */
   .join { padding: 30px 0 90px; }
   .join .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
@@ -175,11 +182,12 @@
   <header class="hero">
     <div class="rise">
       <h1>Understand the <em>Quran.</em></h1>
-      <p>Aqal is a new way to learn Arabic grammar and connect with the Quran. Every day: a 5-minute lesson, Quranic words to practice, and an Ayah to decode.</p>
-      <a class="btn" href="/app/">Start the free lessons</a>
+      <p>Every day: a 5-minute lesson in Arabic grammar, Quranic words to practice, and an Ayah to decode.</p>
+      <a class="btn" href="/app/">Start free</a>
+      <p class="soon">For teens and adults who can already read Arabic script. Aqal doesn't teach the alphabet or tajweed.</p>
       <p class="soon">Lessons 1 to 7 are free, right here in your browser. Android and iPhone apps coming soon: <a href="#join">join the waiting list</a>.</p>
     </div>
-    <div class="phone rise"><img src="img/ayat.webp" width="680" height="1284" fetchpriority="high" alt="Aqal showing Al-'Ankabut 29:44 word by word, each word coloured by its family: Ism, Fi'l or Harf" /></div>
+    <div class="phone rise"><img src="img/ayat.webp" width="680" height="1284" fetchpriority="high" alt="Aqal showing Al-'Ankabut 29:44 word by word, each word colored by its family: Ism, Fi'l or Harf" /></div>
   </header>
 </div>
 
@@ -214,7 +222,7 @@
     <div class="legend"><span class="ism">Ism</span><span class="fil">Fi'l</span><span class="harf">Harf</span></div>
     <p class="meaning">"Allah created the heavens and the earth in truth." Al-'Ankabut 29:44</p>
     <h2>Read each Ayah word by word.</h2>
-    <p class="why">Every Ayah you meet in a lesson is saved in My Ayat, each word in its family colour, so you can come back, read it again and practice its words.</p>
+    <p class="why">Every Ayah you meet in a lesson is saved in My Ayat, each word in its family color, so you can come back, read it again and practice its words.</p>
   </div>
 </section>
 
@@ -231,6 +239,17 @@
     </div>
     <p class="small">Prices in US dollars. In the app they're shown in your currency and may be lower in some countries.
       Premium renews automatically; cancel any time. Bought on the web? <a href="refund/">Full refund within 14 days</a>, no questions asked.</p>
+  </section>
+
+  <section class="sources rise" id="sources">
+    <h2>Sources you can check</h2>
+    <p>Aqal does not type Quran text from memory, and it does not estimate numbers. Each part comes from a named source:</p>
+    <ul>
+      <li><b>Quran text:</b> <a href="https://tanzil.net" rel="noopener">Tanzil Project</a>, Simple Enhanced edition, unchanged.</li>
+      <li><b>English meanings of the Ayat:</b> Saheeh International.</li>
+      <li><b>The grammar of each word, and how often it appears in the Quran:</b> <a href="https://corpus.quran.com" rel="noopener">Quranic Arabic Corpus</a>.</li>
+    </ul>
+    <p>The full list is in the app, under Settings, About Aqal. Found a mistake? Write to <a href="mailto:aqal.app.academy@gmail.com">aqal.app.academy@gmail.com</a>: errors in Quran text or in an answer are fixed first.</p>
   </section>
 
   <section class="join" id="join">
