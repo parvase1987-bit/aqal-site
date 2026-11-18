@@ -68,7 +68,9 @@
   .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 40px 0 72px; min-height: calc(100dvh - 68px); }
   .hero h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1.04; }
   .hero h1 em { font-style: normal; color: var(--brand); }
-  .hero p { font-size: 20px; color: var(--muted); max-width: 30ch; margin: 20px 0 30px; }
+  .hero p { font-size: 20px; color: var(--muted); max-width: 34ch; margin: 20px 0 30px; }
+  .hero p.soon { font-size: 15px; max-width: 40ch; margin: 14px 0 0; }
+  .hero p.soon a { color: var(--brand); font-weight: 700; white-space: nowrap; }
   .phone { justify-self: center; width: min(340px, 80vw); border-radius: 38px; padding: 10px; background: var(--fg); box-shadow: 0 30px 70px -30px rgba(17,22,51,.55); }
   .phone img { display: block; width: 100%; height: auto; border-radius: 30px; }
 
@@ -164,7 +166,7 @@
 <div class="wrap">
   <nav>
     <a class="brand" href="#"><img src="img/icon-72.webp" alt="" width="36" height="36" />Aqal Academy</a>
-    <a class="btn ghost" href="#join">Join the waiting list</a>
+    <a class="btn ghost" href="/app/">Start free</a>
   </nav>
 </div>
 
@@ -173,8 +175,9 @@
   <header class="hero">
     <div class="rise">
       <h1>Understand the <em>Quran.</em></h1>
-      <p>Learn the grammar behind every Ayah, 5&nbsp;minutes a day. Lessons 1 to 7 are free. Coming soon to Android and iPhone.</p>
-      <a class="btn" href="#join">Join the waiting list</a>
+      <p>Aqal is a new way to learn Arabic grammar and connect with the Quran. Every day: a 5-minute lesson, Quranic words to practice, and an Ayah to decode.</p>
+      <a class="btn" href="/app/">Start the free lessons</a>
+      <p class="soon">Lessons 1 to 7 are free, right here in your browser. Android and iPhone apps coming soon: <a href="#join">join the waiting list</a>.</p>
     </div>
     <div class="phone rise"><img src="img/ayat.webp" width="680" height="1284" fetchpriority="high" alt="Aqal showing Al-'Ankabut 29:44 word by word, each word coloured by its family: Ism, Fi'l or Harf" /></div>
   </header>
