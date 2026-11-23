@@ -102,6 +102,14 @@
   .book .copy { align-self: center; padding-bottom: 40px; max-width: 42ch; }
   .book img { max-width: 360px; justify-self: center; }
 
+  /* the six store pictures: one row of six on wide screens, a sideways scroll on phones */
+  .shots { padding: 0 0 80px; }
+  .shots h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; margin-bottom: 20px; }
+  .strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .strip img { display: block; width: 100%; height: auto; border-radius: 14px; background: var(--surface2); }
+  .strip:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; border-radius: 14px; }
+  .stores { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 0; }
+
   /* plans */
   .plans { padding: 30px 0 20px; }
   .plans h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
@@ -157,6 +165,9 @@
     .book .copy { padding-bottom: 0; }
     .join .box { grid-template-columns: 1fr; padding: 28px; }
     .tiers { grid-template-columns: 1fr 1fr; }
+    .shots { padding-bottom: 56px; }
+    .strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+    .strip img { flex: 0 0 auto; width: min(62vw, 240px); scroll-snap-align: start; }
     .row { flex-direction: column; }
   }
   /* narrow phones (320px): the longer brand name and the waiting-list button share one row */
@@ -173,7 +184,7 @@
 <div class="wrap">
   <nav>
     <a class="brand" href="#"><img src="img/icon-72.webp" alt="" width="36" height="36" />Aqal Academy</a>
-    <a class="btn ghost" href="/app/">Start free</a>
+    <a class="btn ghost" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=nav">Start free</a>
   </nav>
 </div>
 
@@ -183,9 +194,18 @@
     <div class="rise">
       <h1>Understand the <em>Quran.</em></h1>
       <p>Every day: a 5-minute lesson in Arabic grammar, Quranic words to practice, and an Ayah to decode.</p>
-      <a class="btn" href="/app/">Start free</a>
+      <a class="btn" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero">Start free</a>
       <p class="soon">For teens and adults who can already read Arabic script. Aqal doesn't teach the alphabet or tajweed.</p>
       <p class="soon">Lessons 1 to 7 are free, right here in your browser. Android and iPhone apps coming soon: <a href="#join">join the waiting list</a>.</p>
+      <!-- LAUNCH DAY (1 Dec, the same hour both stores are live): delete the "coming soon" line above, take the two store
+           buttons below out of this comment, and replace PT_PROVIDER_ID with the owner's App Store provider id
+           (App Store Connect > Apps > Aqal > App Analytics > Acquisition > "Generate a campaign link" shows it as pt=).
+           Every shared link is tagged the same way: see docs/link-tags.md in the quran-app repo.
+      <p class="stores">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=academy.aqal.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dhome%26utm_campaign%3Dhero">Get it on Google Play</a>
+        <a class="btn" href="https://apps.apple.com/app/apple-store/id6825812428?pt=PT_PROVIDER_ID&amp;ct=site-home-hero&amp;mt=8">Download on the App Store</a>
+      </p>
+      -->
     </div>
     <div class="phone rise"><img src="img/ayat.webp" width="680" height="1284" fetchpriority="high" alt="Aqal showing Al-'Ankabut 29:44 word by word, each word colored by its family: Ism, Fi'l or Harf" /></div>
   </header>
@@ -212,6 +232,20 @@
         <p>Every new word goes into My Words, where you practice it both ways. Words you know come back after 3, 7, 21, 60 and 120 days, just before you would forget them.</p>
       </div>
       <img src="img/words.webp" width="680" height="1284" loading="lazy" alt="An Aqal word card: النَّاسُ, the people, an Ism that appears 241 times in the Quran" />
+    </div>
+  </section>
+
+  <!-- The six store pictures (quran-app docs/store-assets/store-2026-11-20/play, the Google Play set, as 540x960 WebP).
+       DRAFT on this branch: owner OK before it goes live. -->
+  <section class="shots rise" id="inside" aria-labelledby="inside-h">
+    <h2 id="inside-h">Inside the app</h2>
+    <div class="strip" tabindex="0" role="region" aria-label="Six pictures of the Aqal app. Scroll sideways to see them all.">
+      <img src="img/store-1.webp" width="540" height="960" loading="lazy" decoding="async" alt="Learn Arabic grammar for the Quran. Understand what you recite. Aqal's Learn screen with Lesson 1.1, The three types of words" />
+      <img src="img/store-2.webp" width="540" height="960" loading="lazy" decoding="async" alt="One small step a day: 5-minute lessons. After a lesson come 4 words to practice, then its Ayah" />
+      <img src="img/store-3.webp" width="540" height="960" loading="lazy" decoding="async" alt="Practise on Quran Ayat: grammar questions in every lesson. A question asks for the two words with We, the One speaking" />
+      <img src="img/store-4.webp" width="540" height="960" loading="lazy" decoding="async" alt="Memorize common Quran words with spaced repetition cards. A card shows خَلَق, khalaqa, he created" />
+      <img src="img/store-5.webp" width="540" height="960" loading="lazy" decoding="async" alt="Recite with understanding. Al-'Ankabut 29:44 word by word, each word in its family color, with its meaning" />
+      <img src="img/store-6.webp" width="540" height="960" loading="lazy" decoding="async" alt="See the beauty of the Quran's Arabic. A bonus lesson shows three words for camel: huwar, a young one; jamal, a grown one; rahila, a riding one" />
     </div>
   </section>
 </div>
