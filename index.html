@@ -144,8 +144,13 @@
   .hint.ok { color: var(--brand); font-weight: 700; } .hint.bad { color: var(--bad); font-weight: 700; }
 
   footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 15px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  footer .social { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; }
+  footer .social { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 4px 20px; } /* not the top bar's space-between (owner 2026-11-23) */
   footer .social a { display: inline-block; padding: 10px 0; font-weight: 700; }
+
+  /* the top bar's Start free only once the big one has scrolled away: never two on screen (owner 2026-11-23) */
+  .js #nav-start { visibility: hidden; opacity: 0; transition: opacity .2s; }
+  .js #nav-start.on { visibility: visible; opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .js #nav-start { transition: none; } }
 
   /* gentle entrances: the page reads top to bottom */
   @media (prefers-reduced-motion: no-preference) {
@@ -184,7 +189,7 @@
 <div class="wrap">
   <nav>
     <a class="brand" href="#"><img src="img/icon-72.webp" alt="" width="36" height="36" />Aqal Academy</a>
-    <a class="btn ghost" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=nav">Start free</a>
+    <a class="btn ghost" id="nav-start" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=nav">Start free</a>
   </nav>
 </div>
 
@@ -194,7 +199,7 @@
     <div class="rise">
       <h1>Understand the <em>Quran.</em></h1>
       <p>Every day: a 5-minute lesson in Arabic grammar, Quranic words to practice, and an Ayah to decode.</p>
-      <a class="btn" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero">Start free</a>
+      <a class="btn" id="hero-start" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero">Start free</a>
       <p class="soon">For teens and adults who can already read Arabic script. Aqal doesn't teach the alphabet or tajweed.</p>
       <p class="soon">Lessons 1 to 7 are free, right here in your browser. Android and iPhone apps coming soon: <a href="#join">join the waiting list</a>.</p>
       <!-- LAUNCH DAY (1 Dec, the same hour both stores are live): delete the "coming soon" line above, take the two store
@@ -352,6 +357,15 @@
     } catch { say("Couldn't reach us. Check your connection and try again.", 'bad'); }
     go.disabled = false; go.textContent = 'Join the waiting list';
   });
+</script>
+<script>
+// one Start free at a time: the top bar shows its own once the big one has scrolled out of view (owner 2026-11-23)
+(function () {
+  var nav = document.getElementById("nav-start"), hero = document.getElementById("hero-start");
+  if (!nav || !hero || !("IntersectionObserver" in window)) return;
+  document.documentElement.classList.add("js");
+  new IntersectionObserver(function (e) { nav.classList.toggle("on", !e[0].isIntersecting); }).observe(hero);
+})();
 </script>
 </body>
 </html>
