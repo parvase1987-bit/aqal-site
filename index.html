@@ -92,12 +92,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.0
   background: var(--brand); color: var(--brand-ink); font: 700 16px var(--body); text-decoration: none; cursor: pointer; white-space: nowrap;
   box-shadow: 0 3px 0 var(--brand-deep); transition: transform .15s ease, box-shadow .15s ease; }
 .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--brand-deep); }
-.stores { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.stores { display: grid; grid-template-columns: repeat(3, minmax(0, 180px)); gap: 12px; align-items: center; }
+/* the three badges the same width (owner 2026-11-28); on a phone two in a row, the browser badge centred under them */
 /* the official store badges (Apple and Google artwork), equal height */
 .badge-link { display: inline-block; border-radius: 10px; line-height: 0; }
-.badge-link img { height: 56px; width: auto; display: block; }
+.badge-link img { width: 100%; height: auto; display: block; }
 /* the browser, drawn like the two store badges (black, thin grey edge, same height) */
-.badge-web { display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 18px 0 14px; border-radius: 10px; background: #000000; border: 1.5px solid #A6A6A6; color: #FFFFFF; text-decoration: none; font: 400 25px/1 var(--body); letter-spacing: -0.01em; line-height: 1; }
+.badge-web { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; aspect-ratio: 3 / 1; height: auto; padding: 0 18px 0 14px; border-radius: 10px; background: #000000; border: 1.5px solid #A6A6A6; color: #FFFFFF; text-decoration: none; font: 400 25px/1 var(--body); letter-spacing: -0.01em; line-height: 1; }
 .badge-web svg { width: 30px; height: 30px; flex: none; }
 .badge-web span { display: grid; gap: 3px; }
 .m-only { display: none; }
@@ -372,17 +373,18 @@ footer nav a { font-weight: 700; padding: 6px 0; }
   /* a smaller tilt, turning on the middle: turning on the bottom swings the top corner off a narrow screen */
   .phone { --rot: 3deg; --rot0: 7deg; transform-origin: 50% 50%; } .flip .phone { --rot: -3deg; --rot0: -7deg; }
   .star, .flip .star { width: 120vw; left: 50%; right: auto; translate: -50% -50%; }
-  .badge-link img { height: 48px; }
-  .get .badge-web, .closing .badge-web, .hero .badge-web { display: none; } .m-only { display: block; }
+  .stores { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 380px; }
+  .stores .badge-web { grid-column: 1 / -1; justify-self: center; width: calc(50% - 6px); }
+  .closing .stores { margin-inline: auto; }
   /* the opening, version B (owner 2026-11-28): the phone straight after the headline, the buttons under it */
   .hero .brand { font-size: 18px; gap: 8px; margin-bottom: 22px; line-height: 1.2; } .hero .brand img { width: 28px; height: 28px; border-radius: 8px; }
   .hero > .wrap { display: flex; flex-direction: column; }
   .hero .copy { display: contents; }
   .hero .brand { order: 1; } .hero .head { order: 2; } .hero .small { order: 3; }
   .hero .stage { order: 4; height: var(--ph); margin-top: 26px; }
-  .hero .stores { order: 5; margin-top: 34px; flex-wrap: nowrap; gap: 10px; } .hero .badge-link img { height: 44px; }
-  .hero .web-line { order: 6; } .hero .free-line { order: 7; margin: 10px 0 48px; font-size: 14px; font-weight: 400; }
-  .badge-web { height: 48px; font-size: 21px; padding: 0 14px 0 12px; } .badge-web svg { width: 26px; height: 26px; } .badge-web small { font-size: 11px; }
+  .hero .stores { order: 5; margin-top: 34px; gap: 10px; }
+  .hero .free-line { order: 7; margin: 10px 0 48px; font-size: 14px; font-weight: 400; }
+  .badge-web { font-size: 19px; padding: 0 10px; gap: 8px; } .badge-web svg { width: 24px; height: 24px; } .badge-web small { font-size: 10px; }
   .twice { grid-template-columns: 1fr; }
   .get-grid { grid-template-columns: 1fr; grid-template-areas: "text" "fam" "act"; }
   .get-act { margin-top: 0; }
@@ -428,7 +430,6 @@ footer nav a { font-weight: 700; padding: 6px 0; }
         <a class="badge-link" href="https://apps.apple.com/app/apple-store/id6825812428?pt=129655652&amp;ct=site-home-hero&amp;mt=8"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
         <a class="badge-link badge-web" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/><path d="M2.8 12h18.4M12 2.8c2.9 3 2.9 15.4 0 18.4M12 2.8c-2.9 3-2.9 15.4 0 18.4" fill="none" stroke="#FFFFFF" stroke-width="1.8"/></svg><span><small>Start free in your</small>Browser</span></a>
       </div>
-      <p class="web-line m-only">or <a class="web-link" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=herophone">start free in your browser</a> →</p>
       <p class="free-line">Lessons 1 to 7 are free. Lesson 1 needs no account.</p>
     </div>
     <div class="stage">
@@ -583,7 +584,6 @@ footer nav a { font-weight: 700; padding: 6px 0; }
         <a class="badge-link" href="https://apps.apple.com/app/apple-store/id6825812428?pt=129655652&amp;ct=site-home-get&amp;mt=8"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
         <a class="badge-link badge-web" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=get"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/><path d="M2.8 12h18.4M12 2.8c2.9 3 2.9 15.4 0 18.4M12 2.8c-2.9 3-2.9 15.4 0 18.4" fill="none" stroke="#FFFFFF" stroke-width="1.8"/></svg><span><small>Start free in your</small>Browser</span></a>
       </div>
-      <p class="web-line m-only">or <a class="web-link" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=getphone">start free in your browser</a> →</p>
       <p class="get-note">Google Play for Android phones and tablets. App Store for iPhone and iPad.</p>
     </div>
   </div>
@@ -645,7 +645,6 @@ footer nav a { font-weight: 700; padding: 6px 0; }
         <a class="badge-link" href="https://apps.apple.com/app/apple-store/id6825812428?pt=129655652&amp;ct=site-home-end&amp;mt=8"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
         <a class="badge-link badge-web" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=end"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/><path d="M2.8 12h18.4M12 2.8c2.9 3 2.9 15.4 0 18.4M12 2.8c-2.9 3-2.9 15.4 0 18.4" fill="none" stroke="#FFFFFF" stroke-width="1.8"/></svg><span><small>Start free in your</small>Browser</span></a>
       </div>
-      <p class="web-line m-only">or <a class="web-link" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=endphone">start free in your browser</a> →</p>
     <p class="free-line">Lessons 1 to 7 are free. Lesson 1 needs no account.</p>
   </div>
 </section>
