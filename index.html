@@ -293,7 +293,6 @@
   </footer>
 </div>
 
-<script src="config.js"></script>
 <script>
   // entrances, once, as each part comes into view
   const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.2 }) : null;
