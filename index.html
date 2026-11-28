@@ -40,7 +40,7 @@
   --brand: #0B7F62; --brand-soft: #DAF1E9; --brand-deep: #075C47; --brand-ink: #FFFFFF;
   --gold: #F4A640; --gold-ink: #2A1700; --night: #090D20;
   --ism-n: #62A6F6; --fil-n: #F69B42; --harf-n: #B985EC;
-  --rv-bg: #FFFBEA; --rv-line: #E9D58A; --rv-fg: #5A4300;
+
   --display: "Bricolage", "Figtree", system-ui, sans-serif;
   --body: "Figtree", system-ui, sans-serif;
   --arabic: "Amiri", "Noto Naskh Arabic", serif;
@@ -50,11 +50,11 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #090D20; --surface: #121834; --line: #283059; --fg: #EDEFFA; --muted: #A3ABD0;
   --brand: #33C99A; --brand-soft: #0F3A2E; --brand-deep: #8DE8C9; --brand-ink: #06201A; --night: #050817;
-  --rv-bg: #2A2410; --rv-line: #5A4A18; --rv-fg: #F2DE9A; color-scheme: dark } }
+ color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #090D20; --surface: #121834; --line: #283059; --fg: #EDEFFA; --muted: #A3ABD0;
   --brand: #33C99A; --brand-soft: #0F3A2E; --brand-deep: #8DE8C9; --brand-ink: #06201A; --night: #050817;
-  --rv-bg: #2A2410; --rv-line: #5A4A18; --rv-fg: #F2DE9A; color-scheme: dark }
+ color-scheme: dark }
 
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
@@ -73,7 +73,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.0
   box-shadow: 0 10px 30px -10px rgba(9, 13, 32, .45), 0 0 0 1px var(--line); white-space: nowrap; }
 .js .fnav { opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s; }
 .js .fnav.on { opacity: 1; visibility: visible; }
-.js .fnav.on.away { opacity: 0; visibility: hidden; }
+.js .fnav.on.away, .js .fnav.by-stores { opacity: 0; visibility: hidden; }
 .fnav .where { font-weight: 700; font-size: 15px; min-width: 9.5em; }
 .fnav .btn { min-height: 40px; padding: 0 16px; font-size: 15px; box-shadow: none; }
 .rosette { width: 34px; height: 34px; display: block; overflow: visible; }
@@ -152,6 +152,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.0
 .phone .sweep { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%); transform: translateX(-120%); }
 /* real app screens you turn yourself (Words, Beauty) */
 .scr video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* iOS Low Power Mode refuses play(): never show Safari's own play symbol over a phone (nothing to press here) */
+.scr video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+.scr video::-webkit-media-controls { display: none !important; }
 .flip .copy, .flip .detail { padding-left: 32px; }
 /* a centred scene (owner 2026-11-28: vary one of the middle scenes; approved) */
 .scene.centre { --ph: clamp(520px, calc(100svh - 220px), 680px); }
@@ -370,7 +373,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
   .hero .stage { order: 4; height: var(--ph); margin-top: 26px; }
   .hero .stores { order: 5; margin-top: 34px; flex-wrap: nowrap; gap: 10px; } .hero .badge-link img { height: 44px; }
   .hero .web-line { order: 6; } .hero .free-line { order: 7; margin: 10px 0 48px; font-size: 14px; font-weight: 400; }
-  .fnav:not(.away) { opacity: 1; visibility: visible; }
+  .fnav:not(.away):not(.by-stores) { opacity: 1; visibility: visible; }
   .badge-web { height: 48px; font-size: 21px; padding: 0 14px 0 12px; } .badge-web svg { width: 26px; height: 26px; } .badge-web small { font-size: 11px; }
   .twice { grid-template-columns: 1fr; }
   .get-grid { grid-template-columns: 1fr; grid-template-areas: "text" "fam" "act"; }
@@ -385,8 +388,6 @@ footer nav a { font-weight: 700; padding: 6px 0; }
   .days { width: 100%; max-width: 340px; }
   .tier { padding: 16px 14px; } .tier .price { font-size: 26px; } .tier .per { font-size: 14px; }
   .tiers { grid-template-columns: 1fr 1fr; }
-  .rv .wrap { grid-template-columns: auto 1fr; }
-  .rv textarea { grid-column: 1 / -1; }
   .fnav { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); }
   .fnav .where { min-width: 0; font-size: 14px; }
   @media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) {
@@ -530,7 +531,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
     </div>
     <div class="stage">
       <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
-      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><img src="img/c-1.jpg" alt="A bonus lesson page: three Arabic words for camel, each for a different age or use"></div></div></div>
+      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><img src="img/c-1.jpg" loading="lazy" alt="A bonus lesson page: three Arabic words for camel, each for a different age or use"></div></div></div>
     </div>
   </div>
 </section>
@@ -548,7 +549,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
       </ul>
       <p class="start">You start with <b class="n">Nahw</b>, in Lesson 1.</p>
     </div>
-    <figure class="jpic"><img class="lt" src="img/journey-light.jpg" alt="The journey as a path: Nahw, then Sarf, then Balagha, ending at a Quran stand" loading="lazy"><img class="dk" src="img/journey-dark.jpg" alt="" loading="lazy"></figure>
+    <figure class="jpic"><img class="lt" src="img/journey-light.jpg" alt="The journey as a path: Nahw, then Sarf, then Balagha, ending at a Quran stand" loading="lazy"><img class="dk" src="img/journey-dark.jpg" alt="The journey as a path: Nahw, then Sarf, then Balagha, ending at a Quran stand" loading="lazy"></figure>
   </div>
 </section>
 
@@ -697,7 +698,16 @@ ros.innerHTML = DAWN.map((_, i) => `<ellipse class="p" cx="0" cy="-10.5" rx="5" 
 const petals = [...ros.querySelectorAll(".p")];
 const fnav = document.getElementById("fnav"), where = document.getElementById("where"), heroStores = document.getElementById("hero-stores");
 const hasIO = "IntersectionObserver" in window; // without it the floating menu simply stays hidden
-if (hasIO) new IntersectionObserver((es) => fnav.classList.toggle("on", !es[0].isIntersecting && es[0].boundingClientRect.top < 0)).observe(heroStores);
+if (hasIO) new IntersectionObserver((es) => fnav.classList.toggle("on", !es[0].isIntersecting), { rootMargin: "0px 0px 100000px 0px" }).observe(heroStores);
+// and steps aside while any row of store buttons is on screen
+if (hasIO) {
+  const shown = new Set();
+  const storesIO = new IntersectionObserver((es) => {
+    es.forEach((e) => (e.isIntersecting ? shown.add(e.target) : shown.delete(e.target)));
+    fnav.classList.toggle("by-stores", shown.size > 0);
+  });
+  document.querySelectorAll(".stores").forEach((el) => storesIO.observe(el));
+}
 let reached = 0, done = false;
 const fill = (n) => {
   for (let i = 0; i < 7; i++) petals[i].style.fill = i < Math.min(n, 7) ? DAWN[i] : "";
