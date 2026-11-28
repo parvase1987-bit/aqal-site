@@ -135,6 +135,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.0
 .end-brand { display: grid; justify-items: center; gap: 8px; margin: 0 0 18px; font: 800 30px var(--display); letter-spacing: -0.01em; }
 .end-icon { display: block; margin: 0; width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 6px 18px -6px rgba(0, 0, 0, .35); }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* the icon is green like the green bands: a thin white ring keeps its edge visible on every colour (owner 2026-11-28) */
+.brand img, .mark img, .end-icon { box-shadow: 0 0 0 2px rgba(255, 255, 255, .9), 0 4px 12px -4px rgba(0, 0, 0, .35); }
 /* the opening's "5-minute lessons": a plain line in gold, nothing that looks pressable (owner 2026-11-28) */
 .s-green { background: #0B7F62; --c: #0B7F62; }
 .s-orange { background: #F4A640; --c: #F4A640; color: #2A1700; } .s-orange .head .pill { color: #F4A640; } .s-orange .head .pill::before { background: #2A1700; } .s-orange .star path { fill: #7A3E00; opacity: .12; }
