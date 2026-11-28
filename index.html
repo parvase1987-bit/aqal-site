@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aqal Academy: Learn Quranic Arabic and Understand the Quran</title>
-<meta name="description" content="Understand the Quran. Aqal teaches the Arabic grammar behind every Ayah in 5-minute lessons, keeps the words you learn with spaced review, and shows each Ayah word by word. For Android and iPhone." />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Learn Arabic Grammar for the Quran | Aqal Academy</title>
+<meta name="description" content="Learn Arabic grammar for the Quran and understand what you recite. 5-minute lessons, practice on Quran Ayat, and spaced repetition cards for common Quran words. On Android, iPhone, iPad and the web." />
 <link rel="canonical" href="https://aqal.academy/" />
 <meta name="google-site-verification" content="iA2pXs8bXxGPje5aFsLT4KGIwpojlnBi0AONgMb6NvA" />
 <meta name="theme-color" content="#0B7F62" />
 <link rel="icon" href="img/icon.png" />
 <meta property="og:site_name" content="Aqal Academy" />
-<meta property="og:title" content="Aqal Academy: Learn Quranic Arabic and Understand the Quran" />
-<meta property="og:description" content="Understand the Quran. Learn the grammar behind every Ayah, 5 minutes a day." />
+<meta property="og:title" content="Learn Arabic Grammar for the Quran | Aqal Academy" />
+<meta property="og:description" content="Learn Arabic grammar for the Quran. Understand what you recite, 5 minutes a day." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://aqal.academy/" />
 <meta property="og:image" content="https://aqal.academy/img/share-2.png" />
@@ -22,350 +22,717 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Aqal Academy","alternateName":["Aqal","aqal.academy"],"url":"https://aqal.academy/"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Aqal Academy","alternateName":"Aqal","url":"https://aqal.academy/","logo":"https://aqal.academy/img/icon.png","email":"aqal.app.academy@gmail.com","sameAs":["https://www.instagram.com/aqal.academy/","https://www.facebook.com/aqal.academy/","https://www.youtube.com/@aqal.academy","https://www.tiktok.com/@aqal_academy"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"Aqal","alternateName":"Aqal Academy","url":"https://aqal.academy/","applicationCategory":"EducationalApplication","operatingSystem":"Android, iOS","description":"Quranic Arabic grammar in 5-minute lessons, word meanings with spaced review, and every Ayah word by word.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Lessons 1 to 7 free; Premium for the rest"}}</script>
-<!-- aqal.academy landing page (owner 2026-10-14). Real app screenshots in img/ (taken from the app's web build).
-     The waiting-list form adds an email to Supabase public.waitlist (insert-only; migration 20261014130000).
-     config.js holds the public Supabase URL and publishable key (the same ones inside the app; written by the main repo's website/make-config.cjs). -->
+<link rel="preload" href="fonts/BricolageGrotesque_800ExtraBold.ttf" as="font" type="font/ttf" crossorigin />
+<!-- aqal.academy home page, redesigned 2026-11 from the store pictures. Built by quran-app
+     docs/review-2026-11-27/site/make-prod.cjs from the approved mock-up: change the mock-up, then run it again.
+     App Store links carry the provider id (pt=) and a campaign (ct=): see quran-app docs/link-tags.md. -->
+<script>document.documentElement.classList.add("js");</script>
 <style>
-  @font-face { font-family: "Bricolage"; src: url(fonts/BricolageGrotesque_800ExtraBold.ttf) format("truetype"); font-weight: 800; font-display: swap; }
-  @font-face { font-family: "Figtree"; src: url(fonts/Figtree_400Regular.ttf) format("truetype"); font-weight: 400; font-display: swap; }
-  @font-face { font-family: "Figtree"; src: url(fonts/Figtree_700Bold.ttf) format("truetype"); font-weight: 700; font-display: swap; }
-  @font-face { font-family: "Amiri"; src: url(fonts/Amiri_700Bold.ttf) format("truetype"); font-weight: 700; font-display: swap; }
+/* Layout (v2, after the impeccable review): seven colour scenes from the store pictures. Copy on one side; on the other
+   a big phone sized by the screen's height, pushed to the outer edge, the star turning behind it and a "pop" card cut
+   from the real app in front of it. Then a calm part (Get Aqal, learn, plans, sources, questions) and a closing scene. */
+@font-face { font-family: "Bricolage"; src: url(fonts/BricolageGrotesque_800ExtraBold.ttf) format("truetype"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Figtree"; src: url(fonts/Figtree_400Regular.ttf) format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Figtree"; src: url(fonts/Figtree_700Bold.ttf) format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Amiri"; src: url(fonts/Amiri_700Bold.ttf) format("truetype"); font-weight: 700; font-display: swap; }
+:root {
+  --bg: #F3F5FB; --surface: #FFFFFF; --line: #D7DDEE; --fg: #111633; --muted: #4F5778;
+  --brand: #0B7F62; --brand-soft: #DAF1E9; --brand-deep: #075C47; --brand-ink: #FFFFFF;
+  --gold: #F4A640; --gold-ink: #2A1700; --night: #090D20;
+  --ism-n: #62A6F6; --fil-n: #F69B42; --harf-n: #B985EC;
 
-  :root {
-    --bg: #F3F5FB; --surface: #FFFFFF; --surface2: #E8ECF7; --line: #D7DDEE; --fg: #111633; --muted: #4F5778;
-    --brand: #0B7F62; --brand-soft: #DAF1E9; --brand-deep: #075C47; --brand-ink: #FFFFFF;
-    --reward: #B57400; --reward-soft: #FBF0D9;
-    --ism: #2672CF; --fil: #A85508; --harf: #8740BE; --bad: #B4232F; /* fil a shade darker than the app's: readable as small text */
-    --radius: 18px;
+  --display: "Bricolage", "Figtree", system-ui, sans-serif;
+  --body: "Figtree", system-ui, sans-serif;
+  --arabic: "Amiri", "Noto Naskh Arabic", serif;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-card: cubic-bezier(.25, 1, .5, 1);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #090D20; --surface: #121834; --line: #283059; --fg: #EDEFFA; --muted: #A3ABD0;
+  --brand: #33C99A; --brand-soft: #0F3A2E; --brand-deep: #8DE8C9; --brand-ink: #06201A; --night: #050817;
+ color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #090D20; --surface: #121834; --line: #283059; --fg: #EDEFFA; --muted: #A3ABD0;
+  --brand: #33C99A; --brand-soft: #0F3A2E; --brand-deep: #8DE8C9; --brand-ink: #06201A; --night: #050817;
+ color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+a { color: inherit; }
+img { max-width: 100%; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+.ar { font-family: var(--arabic); direction: rtl; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; box-shadow: 0 0 0 2px #0B1A14; border-radius: 8px; }
+.s-orange :focus-visible { outline-color: #2A1700; }
+
+/* ── the floating nav ── */
+.fnav { position: fixed; z-index: 35; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 16px); transform: translateX(-50%);
+  display: flex; align-items: center; gap: 12px; padding: 6px 6px 6px 8px; border-radius: 999px; background: var(--surface); color: var(--fg);
+  box-shadow: 0 10px 30px -10px rgba(9, 13, 32, .45), 0 0 0 1px var(--line); white-space: nowrap; }
+.js .fnav { opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s; }
+.js .fnav.on { opacity: 1; visibility: visible; }
+.js .fnav.on.away, .js .fnav.by-stores { opacity: 0; visibility: hidden; }
+.fnav .where { font-weight: 700; font-size: 15px; min-width: 9.5em; }
+.fnav .btn { min-height: 40px; padding: 0 16px; font-size: 15px; box-shadow: none; }
+.rosette { width: 34px; height: 34px; display: block; overflow: visible; }
+.rosette .p { fill: var(--line); transition: fill .3s ease; }
+.rosette .c { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.rosette.done .c { fill: #F6D36B; stroke: #F6D36B; }
+.ros-wrap { position: relative; }
+.ros-wrap .glow { position: absolute; inset: -6px; border-radius: 50%; pointer-events: none; }
+.ros-wrap.burst .glow { animation: glow .9s ease-out; }
+@keyframes glow { 0% { box-shadow: 0 0 0 0 rgba(246, 211, 107, .7); } 100% { box-shadow: 0 0 0 16px rgba(246, 211, 107, 0); } }
+.speck { position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; border-radius: 50%; background: #F6D36B; pointer-events: none; animation: speck 1.4s ease-out forwards; }
+@keyframes speck { from { transform: translate(-50%, -50%); opacity: 1; } to { transform: translate(var(--dx), var(--dy)); opacity: 0; } }
+
+/* ── buttons ── */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 22px; border-radius: 14px; border: 0;
+  background: var(--brand); color: var(--brand-ink); font: 700 16px var(--body); text-decoration: none; cursor: pointer; white-space: nowrap;
+  box-shadow: 0 3px 0 var(--brand-deep); transition: transform .15s ease, box-shadow .15s ease; }
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--brand-deep); }
+.stores { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+/* the official store badges (Apple and Google artwork), equal height */
+.badge-link { display: inline-block; border-radius: 10px; line-height: 0; }
+.badge-link img { height: 56px; width: auto; display: block; }
+/* the browser, drawn like the two store badges (black, thin grey edge, same height) */
+.badge-web { display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 18px 0 14px; border-radius: 10px; background: #000000; border: 1.5px solid #A6A6A6; color: #FFFFFF; text-decoration: none; font: 400 25px/1 var(--body); letter-spacing: -0.01em; line-height: 1; }
+.badge-web svg { width: 30px; height: 30px; flex: none; }
+.badge-web span { display: grid; gap: 3px; }
+.m-only { display: none; }
+.web-line { margin: 14px 0 0; font-size: 16px; }
+.badge-web small { font: 400 12px/1 var(--body); letter-spacing: .01em; }
+.web-link { font-weight: 700; text-underline-offset: 4px; }
+
+/* ── the scenes ── */
+.scene { --ph: clamp(560px, calc(100svh - 100px), 820px); --pw: calc(var(--ph) * 390 / 844);
+  position: relative; overflow: clip; isolation: isolate; color: #FFFFFF; view-timeline: --scene block; }
+.scene > .wrap { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; min-height: min(100svh, 1000px); padding-block: 32px;
+  grid-template-rows: 1fr auto auto 1fr; grid-template-areas: ". stage" "copy stage" "detail stage" ". stage"; }
+.scene.flip > .wrap { grid-template-areas: "stage ." "stage copy" "stage detail" "stage ."; }
+.copy { grid-area: copy; min-width: 0; position: relative; z-index: 2; }
+.scene .detail { grid-area: detail; position: relative; z-index: 2; }
+.head { font-size: clamp(40px, 5vw, 68px); line-height: 1.08; }
+.head .pill { white-space: nowrap; }
+.hero .head { font-size: clamp(40px, 5.2vw, 66px); }
+.head > span { display: block; }
+.head .xl { font-size: 1.62em; line-height: .98; color: var(--gold); letter-spacing: -0.03em; }
+.head .pill { position: relative; display: table; margin: .22em 0 .08em; padding: .02em .28em .06em .22em; color: var(--c); isolation: isolate; }
+.head .pill::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: .3em; background: #FFFFFF; }
+.small { font: 700 clamp(20px, 2vw, 26px)/1.25 var(--body); margin: 22px 0 0; }
+.small .gold { position: relative; display: inline-block; padding: 3px 12px 4px 10px; color: var(--gold-ink); isolation: isolate; }
+.small .gold::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 10px; background: var(--gold); }
+.detail { margin: 18px 0 0; max-width: 40ch; font-size: 18px; line-height: 1.55; }
+.fine { margin: 18px 0 0; max-width: 46ch; font-size: 15px; }
+.free-line { margin: 14px 0 0; font-size: 16px; font-weight: 700; }
+.brand { display: flex; align-items: center; gap: 10px; margin: 0 0 22px; font: 800 24px var(--display); letter-spacing: -0.01em; }
+.brand img { width: 40px; height: 40px; border-radius: 11px; box-shadow: 0 2px 0 rgba(0, 0, 0, .18); }
+/* the opening's "5-minute lessons": a plain line in gold, nothing that looks pressable (owner 2026-11-28) */
+.s-green { background: #0B7F62; --c: #0B7F62; }
+.s-orange { background: #F4A640; --c: #F4A640; color: #2A1700; } .s-orange .head .pill { color: #F4A640; } .s-orange .head .pill::before { background: #2A1700; } .s-orange .star path { fill: #7A3E00; opacity: .12; }
+.s-blue { background: #2742C7; --c: #2742C7; }
+.s-purple { background: #6B35B0; --c: #6B35B0; }
+.hero .stores { margin-top: 30px; }
+.hero .web-link { color: #FFFFFF; }
+
+/* the stage: a big phone at the outer edge, the star behind it, a pop card in front of its inner edge */
+.stage { grid-area: stage; position: relative; align-self: center; height: var(--ph); min-width: 0; }
+.star { position: absolute; z-index: -1; width: calc(var(--ph) * .75); top: 50%; right: calc(var(--pw) / 2); translate: 50% -50%; }
+.flip .star { right: auto; left: calc(var(--pw) / 2); translate: -50% -50%; }
+.star path { fill: #FFFFFF; opacity: .08; }
+.lift { position: absolute; top: 0; right: 12px; width: var(--pw); height: var(--ph); }
+.flip .lift { right: auto; left: 12px; }
+.phone { --rot: 4deg; --rot0: 9deg; position: relative; width: 100%; height: 100%; padding: 2.5%; border-radius: 13% / 6%; background: #0B0D17;
+  box-shadow: 0 40px 80px -30px rgba(6, 10, 30, .65), 0 0 0 1.5px rgba(255, 255, 255, .22) inset; transform: rotate(var(--rot)); transform-origin: 50% 100%; }
+.flip .phone { --rot: -4deg; --rot0: -9deg; }
+.phone .scr { position: relative; width: 100%; height: 100%; border-radius: 11% / 5%; overflow: hidden; background: #0B0D17; }
+.phone video, .phone img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.phone .island { position: absolute; top: 1.2%; left: 50%; width: 30%; height: 3.2%; border-radius: 99px; background: #05060C; transform: translateX(-50%); z-index: 2; }
+.phone .sweep { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%); transform: translateX(-120%); }
+/* real app screens you turn yourself (Words, Beauty) */
+.scr video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* iOS Low Power Mode refuses play(): never show Safari's own play symbol over a phone (nothing to press here) */
+.scr video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+.scr video::-webkit-media-controls { display: none !important; }
+.flip .copy, .flip .detail { padding-left: 32px; }
+/* a centred scene (owner 2026-11-28: vary one of the middle scenes; approved) */
+.scene.centre { --ph: clamp(520px, calc(100svh - 220px), 680px); }
+.scene.centre > .wrap { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "copy" "detail" "days" "stage"; justify-items: center; text-align: center; row-gap: 0; padding-block: 132px 0; }
+.centre .head > span, .centre .head .pill { margin-inline: auto; }
+.centre .detail { margin-inline: auto; }
+.centre .stage { width: 100%; margin-top: 40px; height: calc(var(--ph) * .82); }
+.centre .lift { left: 50%; right: auto; translate: -50% 0; }
+.centre .phone { --rot: 0deg; --rot0: 0deg; }
+.centre .star { left: 50%; right: auto; translate: -50% -30%; }
+.days { grid-area: days; list-style: none; display: flex; gap: 0; margin: 28px 0 0; padding: 0; counter-reset: d; }
+.days li { position: relative; display: grid; justify-items: center; min-width: 76px; font: 700 14px var(--body); color: rgba(255, 255, 255, .9); }
+.days li b { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 6px; border-radius: 50%; background: #FFFFFF; color: var(--c); font: 800 18px var(--display); position: relative; z-index: 1; }
+.days li + li::before { content: ""; position: absolute; top: 24px; right: 50%; width: 100%; height: 3px; background: rgba(255, 255, 255, .45); }
+
+/* scene 2: why it matters */
+.why { position: relative; overflow: clip; isolation: isolate; background: var(--night); color: #EDEFFA; view-timeline: --why block; }
+/* the same star as behind every phone, large and faint behind the two Ayah cards (owner 2026-11-28: align with the other scenes) */
+.why .star { position: absolute; z-index: -1; width: min(900px, 110vw); left: 50%; top: 62%; translate: -50% -50%; right: auto; }
+.why .star path { fill: #FFFFFF; opacity: .05; }
+.why .wrap { display: block; padding-block: clamp(72px, 10vw, 120px); }
+/* layout A, centred and wider (owner 2026-11-28): the first sentence big, the second smaller, the rest a caption */
+.why .wrap { text-align: center; }
+.why .top { display: grid; gap: 22px; justify-items: center; }
+.why .lead { font: 800 clamp(30px, 4.2vw, 56px)/1.16 var(--display); max-width: 30ch; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+.why .mid { margin: 0; max-width: 52ch; font: 700 clamp(19px, 1.9vw, 25px)/1.45 var(--body); color: #C9CEE6; text-wrap: balance; }
+.why .mid em { font-style: normal; color: var(--gold); }
+.why .twice { text-align: left; }
+.legend { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin: 20px 0 0; font-weight: 700; font-size: 16px; }
+.legend small { font-size: 15px; font-weight: 400; color: #C9CEE6; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: currentColor; margin-right: 8px; }
+.why .caption { margin: 14px auto 0; color: #A3ABD0; font-size: 17px; max-width: 60ch; }
+.twice { margin-top: clamp(44px, 6vw, 64px); display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ay { border-radius: 22px; padding: 26px 24px 24px; background: #121834; border: 1px solid #283059; min-width: 0; color: #EDEFFA; }
+.ay .tag { font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; color: #A3ABD0; }
+.ay .plain { margin: 14px 0 0; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.9; color: #C9CEE6; text-align: center; }
+.ay.on { border-color: #33C99A; background: #0F2A26; }
+.ay.on .tag { color: #8DE8C9; }
+.words { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; margin: 14px 0 0; direction: rtl; }
+.wd { display: grid; justify-items: center; gap: 2px; }
+.wd .ar { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.7; }
+.wd small { direction: ltr; font-size: 14px; font-weight: 700; color: #DDE1F2; }
+.i { color: var(--ism-n); } .f { color: var(--fil-n); } .h { color: var(--harf-n); }
+.ay .mean { margin: 14px 0 0; text-align: center; color: #A3ABD0; font-size: 15px; }
+/* the Reader (owner 2026-11-28, animation 4) */
+.wd { position: relative; }
+/* the small meanings stay for screen readers; the big line below shows them on screen */
+.js .reader .wd small { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.js .reader .wd::before { inset: -4px -8px -2px; }
+.reader .wd::before { content: ""; position: absolute; inset: -4px -8px 18px; border-radius: 14px; box-shadow: 0 0 0 2px currentColor, 0 0 24px -4px currentColor; opacity: 0; transition: opacity .35s ease; }
+.reader .wd:has(.ar.f)::before { color: var(--fil-n); } .reader .wd:has(.ar.i)::before { color: var(--ism-n); } .reader .wd:has(.ar .h)::before { color: var(--harf-n); }
+.reader .wd.on::before { opacity: 1; }
+.big-meaning { margin: 12px 0 0; height: 5.4em; align-content: center; text-align: center; color: #FFFFFF; transition: opacity .25s ease; display: grid; justify-items: center; gap: 2px; }
+.big-meaning .tr { font: italic 700 18px var(--body); color: #8DE8C9; }
+.big-meaning .m { font: 800 26px/1.15 var(--display); }
+.big-meaning .g { font: 800 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
+.big-meaning .g.f { color: var(--fil-n); } .big-meaning .g.i { color: var(--ism-n); } .big-meaning .g.h { color: var(--harf-n); }
+@media (prefers-reduced-motion: reduce) { .js .reader .wd small { position: static; width: auto; height: auto; overflow: visible; clip-path: none; } .js .reader .wd::before { inset: -4px -8px 18px; } .big-meaning { display: none; } }
+
+/* ── the calm part ── */
+.calm { padding-block: 96px 24px; }
+/* What you'll learn: the journey picture from bonus lesson 1.1.9, in the lesson's subject colours */
+.journey { --nahw: #0B7F8F; --sarf: #55607F; --bala: #77700F; padding-block: clamp(72px, 9vw, 120px); }
+.jgrid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
+.journey h2 { font-size: clamp(30px, 3.8vw, 46px); line-height: 1.1; }
+.journey .intro { margin: 14px 0 0; font-size: 18px; color: var(--muted); }
+.subjects { list-style: none; margin: 18px 0 0; padding: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.subjects li { display: grid; grid-template-columns: 96px 1fr; align-items: baseline; gap: 12px; padding: 14px 18px; font-size: 18px; }
+.subjects li + li { border-top: 1px solid var(--line); }
+.subjects b { font: 800 20px var(--display); }
+.journey .n { color: var(--nahw); } .journey .s b { color: var(--sarf); } .journey .b b { color: var(--bala); } .subjects .n b { color: var(--nahw); }
+.subjects li.n { color: inherit; }
+.journey .start { margin: 16px 0 0; font-size: 18px; }
+.jpic { margin: 0; }
+.jpic img { display: block; width: 100%; height: auto; border-radius: 22px; }
+.jpic .dk { display: none; }
+:root[data-theme="dark"] .journey { --nahw: #4CD0DF; --sarf: #A9B6D3; --bala: #D4CF5A; }
+:root[data-theme="dark"] .jpic .lt { display: none; } :root[data-theme="dark"] .jpic .dk { display: block; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .journey { --nahw: #4CD0DF; --sarf: #A9B6D3; --bala: #D4CF5A; }
+  :root:not([data-theme="light"]) .jpic .lt { display: none; } :root:not([data-theme="light"]) .jpic .dk { display: block; } }
+
+/* the ending (owner 2026-11-28): one last green band with the buttons */
+.closing { background: #0B7F62; color: #FFFFFF; padding-block: clamp(72px, 9vw, 112px); text-align: center; }
+.closing h2 { font-size: clamp(34px, 4.6vw, 58px); line-height: 1.08; }
+.closing .stores { justify-content: center; margin-top: 28px; }
+.closing .free-line { margin-top: 18px; }
+.closing .web-link { color: #FFFFFF; }
+
+/* Get Aqal, look A (owner 2026-11-28): one picture of the app on iPad and phone, the two store badges, the browser */
+/* a warm sand band (owner 2026-11-28): black devices stand out on it in light and dark mode */
+.get { background: #F3EBDD; color: #111633; padding-block: clamp(72px, 9vw, 120px); overflow: clip; }
+.get-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "text fam" "act fam"; grid-template-rows: auto 1fr; gap: 0 48px; align-items: start; }
+.get-text { grid-area: text; } .get-act { grid-area: act; margin-top: 30px; } .family { grid-area: fam; }
+.get h2 { font-size: clamp(30px, 3.8vw, 46px); line-height: 1.1; }
+.get .intro { margin: 14px 0 0; max-width: 46ch; font-size: 18px; }
+.get-note { margin: 14px 0 0; font-size: 15px; }
+.get .web-link { color: #075C47; }
+.family { position: relative; height: 480px; }
+.family .glow { position: absolute; inset: 12% 4%; background: radial-gradient(closest-side, rgba(244, 166, 64, .35), transparent); filter: blur(14px); }
+/* like a real iPhone and iPad: black glass, an even bezel, a thin metal edge */
+.family .tab, .family .fph { position: absolute; background: #0A0A0C; box-shadow: 0 0 0 2px #8E8F94, 0 0 0 3px #4A4B50, 0 30px 50px -20px rgba(60, 40, 10, .45); }
+.family img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+/* phone on the left, over the iPad's quiet left column; the iPad on the right shows its word card (owner 2026-11-28) */
+.family .tab { width: 300px; aspect-ratio: 1032 / 1376; right: 4%; top: 0; padding: 3.6%; border-radius: 6.5%; transform: rotate(4deg); }
+.family .tab img { border-radius: 3.2%; }
+.family .fph { z-index: 1; width: 190px; aspect-ratio: 390 / 844; right: calc(4% + 300px - 130px); top: 60px; padding: 2.4%; border-radius: 14% / 6.5%; transform: rotate(-5deg); }
+.family .fph img { border-radius: 12% / 5.6%; }
+/* the iPhone's dynamic island */
+.family .fph::after { content: ""; position: absolute; top: 3.4%; left: 50%; width: 30%; height: 3.3%; border-radius: 99px; background: #0A0A0C; transform: translateX(-50%); }
+.calm h2 { font-size: clamp(30px, 3.8vw, 46px); line-height: 1.1; }
+.calm .intro { color: var(--muted); max-width: 62ch; margin: 14px 0 0; font-size: 18px; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 18px; }
+.stats > span { font-weight: 700; color: var(--fg); }
+.stats > span i { font-style: normal; font-weight: 400; color: var(--muted); margin-left: 6px; }
+.tiers { margin-top: 30px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.tier { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+.tier.pop-tier { border: 2px solid var(--brand); }
+.tier { position: relative; }
+.tiers { margin-top: 42px; }
+.tier .month { margin-top: 4px; font-weight: 700; color: var(--fg); }
+.tier .why-rec { margin: 10px 0 0; font-size: 14px; color: var(--brand-deep); font-weight: 700; }
+.tier .tag { position: absolute; top: -13px; left: 18px; margin: 0 !important; display: inline-block; background: var(--brand-soft); color: var(--brand-deep); font: 700 13px var(--body); border-radius: 999px; padding: 2px 10px; margin-bottom: 8px; }
+.tier h3 { font-size: 18px; }
+.tier .price { font: 800 32px var(--display); margin: 8px 0 2px; font-variant-numeric: tabular-nums; }
+.tier .per { margin: 0; color: var(--muted); font-size: 15px; }
+.plans .after { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; margin-top: 22px; }
+.plans .after p { margin: 0; color: var(--muted); font-size: 14px; max-width: 70ch; }
+.sources ul { color: var(--muted); margin: 16px 0 0; padding-left: 22px; max-width: 70ch; }
+.sources li { margin: 6px 0; } .sources b { color: var(--fg); }
+.sources p { color: var(--muted); max-width: 62ch; }
+.faq .qs { margin-top: 24px; max-width: 820px; }
+.faq details { border-top: 1px solid var(--line); }
+.faq details:last-child { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; padding: 18px 0; font-weight: 700; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font: 800 22px var(--display); color: var(--brand); line-height: 1; }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { margin: 0 0 18px; color: var(--muted); max-width: 66ch; }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: 15px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer a { color: var(--brand); }
+footer nav { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+footer nav a { font-weight: 700; padding: 6px 0; }
+
+/* ── motion ──
+   Everything is visible and in place without the script and with reduced motion. Only transform and opacity move.
+   Text only fades. Pop cards with Arabic or Quran text only fade (class .ar-card), never scale or tilt. */
+@media (prefers-reduced-motion: no-preference) {
+  /* settle in: fade only, once */
+  .js .settle > * { opacity: 0; transition: opacity .45s var(--ease-out); }
+  .js .settle.in > * { opacity: 1; }
+  .js .settle.in > :nth-child(2) { transition-delay: .12s; } .js .settle.in > :nth-child(3) { transition-delay: .24s; }
+  .js .settle.in > :nth-child(4) { transition-delay: .36s; } .js .settle.in > :nth-child(5) { transition-delay: .48s; }
+  /* the pill draws itself in, left to right; its words fade, never move */
+  .js .settle .pill::before, .js .settle .gold::before { clip-path: inset(0 100% 0 0 round .3em); transition: clip-path .5s var(--ease-card) .2s; }
+  .js .settle.in .pill::before, .js .settle.in .gold::before { clip-path: inset(0 0 0 0 round .3em); }
+  /* fallback where scroll-linked CSS is missing: a timed rise when the phone comes into view */
+  .js .scene:not(.hero) .phone { opacity: 0; transform: translateY(40px) scale(.94) rotate(var(--rot0)); transition: opacity .6s ease, transform .9s var(--ease-out); }
+  .js .scene:not(.hero) .phone.in { opacity: 1; transform: rotate(var(--rot)); }
+  /* the opening phone arrives on load, with one light sweep */
+  .js .hero .phone { opacity: 0; transform: translateY(60px) scale(.94) rotate(var(--rot)); transition: opacity 1.1s ease, transform 1.1s var(--ease-out); }
+  .js .hero.in .phone { opacity: 1; transform: rotate(var(--rot)); }
+  .js .hero.in .sweep { animation: sweep 1.1s ease-in-out .9s 1 both; }
+  @keyframes sweep { to { transform: translateX(120%); } }
+  /* scene 2: the plain Ayah, then the coloured one, then its meanings one by one (right to left) */
+  .js .twice .ay { opacity: 0; transition: opacity .6s ease; }
+  .js .twice.in .ay { opacity: 1; } .js .twice.in .ay.on { transition-delay: .5s; }
+  @supports (animation-timeline: view()) {
+    .why .star { animation: turn linear both; animation-timeline: --why; animation-range: cover 0% cover 100%; }
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #090D20; --surface: #121834; --surface2: #1A2145; --line: #283059; --fg: #EDEFFA; --muted: #A3ABD0;
-      --brand: #33C99A; --brand-soft: #0F3A2E; --brand-deep: #8DE8C9; --brand-ink: #06201A;
-      --reward: #F4B83E; --reward-soft: #33280E;
-      --ism: #62A6F6; --fil: #F69B42; --harf: #B985EC; --bad: #FF8A93;
+
+  /* the scroll-linked rise (where the browser can tie motion to scrolling) */
+  @supports (animation-timeline: view()) {
+    .js .scene:not(.hero) .phone, .js .scene:not(.hero) .phone.in { opacity: 1; transition: none;
+      animation: rise linear both; animation-timeline: --scene; animation-range: entry 0% entry 100%; }
+    @keyframes rise {
+      from { transform: translateY(180px) scale(.86) rotate(var(--rot0)); opacity: .4; }
+      40% { opacity: 1; }
+      to { transform: rotate(var(--rot)); opacity: 1; }
     }
+    /* leaving: the phone drifts up a little faster than its scene */
+    .scene .lift { animation: leave linear both; animation-timeline: --scene; animation-range: exit 0% exit 100%; }
+    @keyframes leave { from { transform: none; } to { transform: translateY(-70px); } }
+    /* the star turns slowly behind the phone */
+    .scene .star { animation: turn linear both; animation-timeline: --scene; animation-range: cover 0% cover 100%; }
+    @keyframes turn { from { transform: translateY(80px) rotate(-6deg); } to { transform: translateY(-80px) rotate(10deg); } }
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 400 17px/1.6 "Figtree", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  a { color: var(--brand); }
-  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
-  h1, h2, h3 { font-family: "Bricolage", "Figtree", system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
-  .ar { font-family: "Amiri", serif; direction: rtl; }
+}
 
-  /* nav */
-  nav { height: 68px; display: flex; align-items: center; justify-content: space-between; }
-  .brand { display: flex; align-items: center; gap: 10px; font: 800 22px "Bricolage", sans-serif; color: var(--fg); text-decoration: none; }
-  .brand img { width: 36px; height: 36px; border-radius: 10px; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 14px; border: 0;
-         background: var(--brand); color: var(--brand-ink); font: 700 16px "Figtree", sans-serif; text-decoration: none; cursor: pointer; white-space: nowrap;
-         box-shadow: 0 3px 0 var(--brand-deep); transition: transform .15s ease, box-shadow .15s ease; }
-  .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--brand-deep); }
-  .btn.ghost { background: transparent; color: var(--brand); box-shadow: inset 0 0 0 2px var(--brand); }
+/* ── iPad upright and small laptops: two columns down to 720 px ── */
+@media (max-width: 1099px) { .flip .copy, .flip .detail { padding-left: 0; } }
+@media (max-width: 899px) { .scene { --ph: clamp(520px, calc(100svh - 64px), 700px); } .head { font-size: clamp(36px, 5.6vw, 54px); } }
 
-  /* hero: split */
-  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 40px 0 72px; min-height: calc(100dvh - 68px); }
-  .hero h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1.04; }
-  .hero h1 em { font-style: normal; color: var(--brand); }
-  .hero p { font-size: 20px; color: var(--muted); max-width: 34ch; margin: 20px 0 30px; }
-  .hero p.soon { font-size: 15px; max-width: 40ch; margin: 14px 0 0; }
-  .hero p.soon a { color: var(--brand); font-weight: 700; white-space: nowrap; }
-  .phone { justify-self: center; width: min(340px, 80vw); border-radius: 38px; padding: 10px; background: var(--fg); box-shadow: 0 30px 70px -30px rgba(17,22,51,.55); }
-  .phone img { display: block; width: 100%; height: auto; border-radius: 30px; }
+/* ── phones: copy, then the phone, then the detail line ── */
+@media (max-width: 719px) {
+  .scene { --pw: min(84vw, 340px); --ph: calc(var(--pw) * 844 / 390); view-timeline: none; }
+  .scene.centre { --ph: calc(var(--pw) * 844 / 390); }
+  .scene > .wrap, .scene.flip > .wrap, .scene.centre > .wrap { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "copy" "detail" "days" "stage"; row-gap: 0; min-height: 0; padding-block: 48px 0; }
+  .scene { --pw: min(70vw, 290px); }
+  .scene .detail { margin-top: 14px; }
+  .stage, .centre .stage { margin-top: 30px; height: calc(var(--ph) * .86); }
+  .hero .stage { height: calc(var(--ph) * .9); }
+  .days li { min-width: 0; flex: 1; font-size: 13px; } .days li b { width: 40px; height: 40px; font-size: 16px; } .days li + li::before { top: 20px; }
+  .stage { justify-self: center; width: 100%; }
+  .lift, .flip .lift { left: 50%; right: auto; translate: -50% 0; }
+  /* a smaller tilt, turning on the middle: turning on the bottom swings the top corner off a narrow screen */
+  .phone { --rot: 3deg; --rot0: 7deg; transform-origin: 50% 50%; } .flip .phone { --rot: -3deg; --rot0: -7deg; }
+  .star, .flip .star { width: 120vw; left: 50%; right: auto; translate: -50% -50%; }
+  .badge-link img { height: 48px; }
+  .get .badge-web, .closing .badge-web, .hero .badge-web { display: none; } .m-only { display: block; }
+  /* the opening, version B (owner 2026-11-28): the phone straight after the headline, the buttons under it */
+  .hero .brand { font-size: 18px; gap: 8px; margin-bottom: 14px; } .hero .brand img { width: 28px; height: 28px; border-radius: 8px; }
+  .hero > .wrap { display: flex; flex-direction: column; }
+  .hero .copy { display: contents; }
+  .hero .brand { order: 1; } .hero .head { order: 2; } .hero .small { order: 3; }
+  .hero .stage { order: 4; height: var(--ph); margin-top: 26px; }
+  .hero .stores { order: 5; margin-top: 34px; flex-wrap: nowrap; gap: 10px; } .hero .badge-link img { height: 44px; }
+  .hero .web-line { order: 6; } .hero .free-line { order: 7; margin: 10px 0 48px; font-size: 14px; font-weight: 400; }
+  .badge-web { height: 48px; font-size: 21px; padding: 0 14px 0 12px; } .badge-web svg { width: 26px; height: 26px; } .badge-web small { font-size: 11px; }
+  .twice { grid-template-columns: 1fr; }
+  .get-grid { grid-template-columns: 1fr; grid-template-areas: "text" "fam" "act"; }
+  .get-act { margin-top: 0; }
+  .family { height: 330px; margin: 30px 0 26px; }
+  .family .tab { width: 210px; right: 4%; } .family .fph { width: 140px; right: calc(4% + 210px - 92px); top: 40px; }
 
-  /* the Ayah, word by word */
-  .ayah { background: var(--surface); border-block: 1px solid var(--line); padding: 72px 0; text-align: center; }
-  .ayah .line { font-size: clamp(34px, 6vw, 60px); line-height: 2; margin: 0; }
-  .ism { color: var(--ism); } .fil { color: var(--fil); } .harf { color: var(--harf); }
-  .legend { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin: 6px 0 18px; font-weight: 700; }
-  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: currentColor; margin-right: 8px; }
-  .ayah .meaning { color: var(--muted); font-size: 19px; }
-  .ayah h2 { font-size: clamp(26px, 3.4vw, 38px); max-width: 22ch; margin: 34px auto 10px; }
-  .ayah .why { max-width: 56ch; margin: 0 auto; color: var(--muted); }
+  .jgrid { grid-template-columns: 1fr; gap: 28px; }
+  .subjects li { grid-template-columns: 78px 1fr; padding: 12px 14px; font-size: 16px; }
 
-  /* bento: three real things the app does */
-  .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; padding: 80px 0; }
-  .cell { border-radius: var(--radius); overflow: hidden; position: relative; }
-  .cell h2 { font-size: 26px; line-height: 1.15; margin-bottom: 8px; }
-  .cell p { margin: 0; color: var(--muted); }
-  .words { grid-column: span 4; background: var(--brand-soft); display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 10px; padding: 32px 0 0 32px; }
-  .words img, .book img { width: 100%; display: block; border-radius: 22px 22px 0 0; box-shadow: 0 -10px 40px -20px rgba(17,22,51,.4);
-                         height: 380px; object-fit: cover; object-position: top; } /* the top of each screen tells the story */
-  .words .copy { padding-bottom: 32px; align-self: center; }
-  .daily { grid-column: span 2; padding: 32px; color: #fff; background: #075C47;
-           background-image: radial-gradient(circle at 80% 15%, rgba(244,184,62,.35), transparent 45%),
-             url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.12' stroke-width='1.5'%3E%3Crect x='16' y='16' width='24' height='24'/%3E%3Crect x='16' y='16' width='24' height='24' transform='rotate(45 28 28)'/%3E%3C/g%3E%3C/svg%3E"); display: flex; flex-direction: column; justify-content: flex-end; min-height: 340px; }
-  .daily h2 { font-size: 64px; line-height: 1; }
-  .daily p { color: rgba(255,255,255,.88); }
-  .book { grid-column: span 6; background: var(--surface); border: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; padding: 40px 40px 0; }
-  .book .copy { align-self: center; padding-bottom: 40px; max-width: 42ch; }
-  .book img { max-width: 360px; justify-self: center; }
-
-  /* the six store pictures: one row of six on wide screens, a sideways scroll on phones */
-  .shots { padding: 0 0 80px; }
-  .shots h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; margin-bottom: 20px; }
-  .strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
-  .strip img { display: block; width: 100%; height: auto; border-radius: 14px; background: var(--surface2); }
-  .strip:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; border-radius: 14px; }
-  .stores { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 0; }
-
-  /* plans */
-  .plans { padding: 30px 0 20px; }
-  .plans h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
-  .plans > p { color: var(--muted); margin: 12px 0 24px; max-width: 60ch; }
-  .tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .tier { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
-  .tier.pop { border: 2px solid var(--brand); }
-  .tier h3 { margin: 0; font-size: 18px; }
-  .tier .price { font-size: 32px; font-weight: 800; margin: 8px 0 4px; }
-  .tier .per { color: var(--muted); font-size: 15px; margin: 0; }
-  .tier .tag { display: inline-block; background: var(--brand-soft); color: var(--brand-deep); font-weight: 700; font-size: 13px; border-radius: 999px; padding: 2px 10px; margin-bottom: 8px; }
-  .plans .small { color: var(--muted); font-size: 14px; margin-top: 16px; }
-
-  /* sources: where the text and the numbers come from */
-  .sources { padding: 10px 0 30px; }
-  .sources h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
-  .sources p { color: var(--muted); margin: 12px 0 0; max-width: 60ch; }
-  .sources ul { color: var(--muted); margin: 14px 0 0; padding-left: 22px; max-width: 70ch; }
-  .sources li { margin: 6px 0; }
-  .sources b { color: var(--fg); }
-  /* waiting list */
-  .join { padding: 30px 0 90px; }
-  .join .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
-  .join h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
-  .join p { color: var(--muted); margin: 12px 0 0; }
-  form { display: grid; gap: 8px; }
-  label { font-weight: 700; }
-  .row { display: flex; gap: 10px; }
-  input[type=email] { flex: 1; min-height: 52px; border-radius: 14px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); padding: 0 16px; font: 400 17px "Figtree", sans-serif; }
-  input[type=email]:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px var(--brand-soft); }
-  .hint { font-size: 14px; color: var(--muted); min-height: 1.4em; }
-  .hint.ok { color: var(--brand); font-weight: 700; } .hint.bad { color: var(--bad); font-weight: 700; }
-
-  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 15px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  footer .social { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 4px 20px; height: auto; } /* not the top bar's space-between (owner 2026-11-23) */
-  footer .social a { display: inline-block; padding: 10px 0; font-weight: 700; }
-
-  /* the top bar's Start free only once the big one has scrolled away: never two on screen (owner 2026-11-23) */
-  .js #nav-start { visibility: hidden; opacity: 0; transition: opacity .2s; }
-  .js #nav-start.on { visibility: visible; opacity: 1; }
-  @media (prefers-reduced-motion: reduce) { .js #nav-start { transition: none; } }
-
-  /* gentle entrances: the page reads top to bottom */
-  @media (prefers-reduced-motion: no-preference) {
-    .rise { opacity: 0; transform: translateY(14px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
-    .rise.in { opacity: 1; transform: none; }
-    .word { display: inline-block; opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
-    .ayah.in .word { opacity: 1; transform: none; }
-  }
-
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; min-height: 0; padding: 24px 0 56px; gap: 36px; text-align: left; }
-    .bento { grid-template-columns: 1fr; padding: 56px 0; }
-    .words, .daily, .book { grid-column: auto; }
-    .words { grid-template-columns: 1fr; padding: 28px 28px 0; }
-    .words .copy { padding-bottom: 0; }
-    .book { grid-template-columns: 1fr; padding: 28px 28px 0; }
-    .book .copy { padding-bottom: 0; }
-    .join .box { grid-template-columns: 1fr; padding: 28px; }
-    .tiers { grid-template-columns: 1fr 1fr; }
-    .shots { padding-bottom: 56px; }
-    .strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
-    .strip img { flex: 0 0 auto; width: min(62vw, 240px); scroll-snap-align: start; }
-    .row { flex-direction: column; }
-  }
-  /* narrow phones (320px): the longer brand name and the waiting-list button share one row */
-  @media (max-width: 380px) {
-    .wrap { padding: 0 16px; }
-    nav { gap: 10px; }
-    .brand { font-size: 18px; gap: 8px; min-width: 0; }
-    .brand img { width: 30px; height: 30px; }
-    nav .btn { min-height: 44px; padding: 0 14px; font-size: 14px; }
-  }
+  footer { padding-bottom: 110px; }
+  .days { width: 100%; max-width: 340px; }
+  .tier { padding: 16px 14px; } .tier .price { font-size: 26px; } .tier .per { font-size: 14px; }
+  .tiers { grid-template-columns: 1fr 1fr; }
+  .fnav { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); }
+  .fnav .where { min-width: 0; font-size: 14px; }
+  @media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) {
+    .js .scene:not(.hero) .phone, .js .scene:not(.hero) .phone.in { animation: rise-m linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+    @keyframes rise-m { from { transform: translateY(56px) scale(.9) rotate(calc(var(--rot0) * .78)); opacity: .5; } to { transform: rotate(var(--rot)); opacity: 1; } }
+    .scene .lift { animation: none; }
+    .scene .star { animation: turn-m linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    @keyframes turn-m { from { transform: translateY(30px) rotate(-4deg); } to { transform: translateY(-30px) rotate(6deg); } }
+  } }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <nav>
-    <a class="brand" href="#"><img src="img/icon-72.webp" alt="" width="36" height="36" />Aqal Academy</a>
-    <a class="btn ghost" id="nav-start" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=nav">Start free</a>
-  </nav>
-</div>
+<nav class="fnav" id="fnav" aria-label="Page">
+  <span class="ros-wrap" id="ros"><svg class="rosette" id="rosette" viewBox="-20 -20 40 40" aria-hidden="true"></svg><i class="glow"></i></span>
+  <span class="where" id="where">Learn</span>
+  <a class="btn" href="#get">Get Aqal</a>
+</nav>
 
 <main>
-<div class="wrap">
-  <header class="hero">
-    <div class="rise">
-      <h1>Understand the <em>Quran.</em></h1>
-      <p>Every day: a 5-minute lesson in Arabic grammar, Quranic words to practice, and an Ayah to decode.</p>
-      <a class="btn" id="hero-start" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero">Start free</a>
-      <p class="soon">For teens and adults who can already read Arabic script. Aqal doesn't teach the alphabet or tajweed.</p>
-      <p class="soon">Lessons 1 to 7 are free, right here in your browser. Android and iPhone apps coming soon: <a href="#join">join the waiting list</a>.</p>
-      <!-- LAUNCH DAY (1 Dec, the same hour both stores are live): delete the "coming soon" line above, take the two store
-           buttons below out of this comment, and replace PT_PROVIDER_ID with the owner's App Store provider id
-           (App Store Connect > Apps > Aqal > App Analytics > Acquisition > "Generate a campaign link" shows it as pt=).
-           Every shared link is tagged the same way: see docs/link-tags.md in the quran-app repo.
-      <p class="stores">
-        <a class="btn" href="https://play.google.com/store/apps/details?id=academy.aqal.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dhome%26utm_campaign%3Dhero">Get it on Google Play</a>
-        <a class="btn" href="https://apps.apple.com/app/apple-store/id6825812428?pt=PT_PROVIDER_ID&amp;ct=site-home-hero&amp;mt=8">Download on the App Store</a>
-      </p>
-      -->
-    </div>
-    <div class="phone rise"><img src="img/ayat.webp" width="680" height="1284" fetchpriority="high" alt="Aqal showing Al-'Ankabut 29:44 word by word, each word colored by its family: Ism, Fi'l or Harf" /></div>
-  </header>
-</div>
-
-
-
-<div class="wrap">
-  <section class="bento">
-    <div class="cell words rise">
-      <div class="copy">
-        <h2>Lessons built on real Ayat</h2>
-        <p>Each lesson ends on an Ayah from the Quran. You tap its words, check your answer, and see the reason straight away.</p>
-      </div>
-      <img src="img/lesson.webp" width="680" height="1284" loading="lazy" alt="An Aqal lesson page: the words of Al-'Ankabut 29:44 on cards, each with its meaning and family" />
-    </div>
-    <div class="cell daily rise">
-      <h2>5 min</h2>
-      <p>a day is enough. Short sessions spread over days are remembered longer than cramming (Cepeda et al., Psychological Bulletin, 2006).</p>
-    </div>
-    <div class="cell book rise">
-      <div class="copy">
-        <h2>Quranic word meanings that stick</h2>
-        <p>Every new word goes into My Words, where you practice it both ways. Words you know come back after 3, 7, 21, 60 and 120 days, just before you would forget them.</p>
-      </div>
-      <img src="img/words.webp" width="680" height="1284" loading="lazy" alt="An Aqal word card: النَّاسُ, the people, an Ism that appears 241 times in the Quran" />
-    </div>
-  </section>
-
-  <!-- The six store pictures (quran-app docs/store-assets/store-2026-11-20/play, the Google Play set, as 540x960 WebP).
-       DRAFT on this branch: owner OK before it goes live. -->
-  <section class="shots rise" id="inside" aria-labelledby="inside-h">
-    <h2 id="inside-h">Inside the app</h2>
-    <div class="strip" tabindex="0" role="region" aria-label="Six pictures of the Aqal app. Scroll sideways to see them all.">
-      <img src="img/store-1.webp" width="540" height="960" loading="lazy" decoding="async" alt="Learn Arabic grammar for the Quran. Understand what you recite. Aqal's Learn screen with Lesson 1.1, The three types of words" />
-      <img src="img/store-2.webp" width="540" height="960" loading="lazy" decoding="async" alt="One small step a day: 5-minute lessons. After a lesson come 4 words to practice, then its Ayah" />
-      <img src="img/store-3.webp" width="540" height="960" loading="lazy" decoding="async" alt="Practise on Quran Ayat: grammar questions in every lesson. A question asks for the two words with We, the One speaking" />
-      <img src="img/store-4.webp" width="540" height="960" loading="lazy" decoding="async" alt="Memorize common Quran words with spaced repetition cards. A card shows خَلَق, khalaqa, he created" />
-      <img src="img/store-5.webp" width="540" height="960" loading="lazy" decoding="async" alt="Recite with understanding. Al-'Ankabut 29:44 word by word, each word in its family color, with its meaning" />
-      <img src="img/store-6.webp" width="540" height="960" loading="lazy" decoding="async" alt="See the beauty of the Quran's Arabic. A bonus lesson shows three words for camel: huwar, a young one; jamal, a grown one; rahila, a riding one" />
-    </div>
-  </section>
-</div>
-
-<section class="ayah" id="ayah">
+<!-- 1 · Opening -->
+<section class="scene s-green hero" id="s1" data-name="Learn" data-petal="1">
   <div class="wrap">
-    <p class="line ar" lang="ar"><span class="word fil">خَلَقَ</span> <span class="word ism">اللَّهُ</span> <span class="word ism">السَّمَاوَاتِ</span> <span class="word"><span class="harf">وَ</span><span class="ism">الْأَرْضَ</span></span> <span class="word"><span class="harf">بِ‍</span><span class="ism">‍الْحَقِّ</span></span></p>
-    <div class="legend"><span class="ism">Ism</span><span class="fil">Fi'l</span><span class="harf">Harf</span></div>
-    <p class="meaning">"Allah created the heavens and the earth in truth." Al-'Ankabut 29:44</p>
-    <h2>Read each Ayah word by word.</h2>
-    <p class="why">Every Ayah you meet in a lesson is saved in My Ayat, each word in its family color, so you can come back, read it again and practice its words.</p>
+    <div class="copy settle">
+      <p class="brand"><img src="img/icon.png" alt="" width="40" height="40">Aqal</p>
+      <h1 class="head"><span>Learn</span><span class="xl">Arabic</span><span class="xl">Grammar</span><span class="pill">for the Quran</span></h1>
+      <p class="small">Understand what you recite</p>
+      <div class="stores" id="hero-stores">
+        <a class="badge-link" href="https://play.google.com/store/apps/details?id=academy.aqal.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dhome%26utm_campaign%3Dhero"><img src="img/badge-google-play.png" alt="Get it on Google Play" width="564" height="168"></a>
+        <a class="badge-link" href="https://apps.apple.com/app/apple-store/id6825812428?pt=129655652&amp;ct=site-home-hero&amp;mt=8"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+        <a class="badge-link badge-web" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/><path d="M2.8 12h18.4M12 2.8c2.9 3 2.9 15.4 0 18.4M12 2.8c-2.9 3-2.9 15.4 0 18.4" fill="none" stroke="#FFFFFF" stroke-width="1.8"/></svg><span><small>Start free in your</small>Browser</span></a>
+      </div>
+      <p class="web-line m-only">or <a class="web-link" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=herophone">start free in your browser</a> →</p>
+      <p class="free-line">Lessons 1 to 7 are free. Lesson 1 needs no account.</p>
+    </div>
+    <div class="stage">
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
+      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><video data-src="video/loop-learn.mp4" poster="img/loop-learn.jpg" muted playsinline loop preload="none" aria-label="Someone opens Lesson 1 from Aqal's Home screen and starts its first page"></video><i class="sweep"></i></div></div></div>
+    </div>
   </div>
 </section>
 
-<div class="wrap">
+<!-- 2 · Why it matters -->
+<section class="why" id="s2" data-name="Why it matters" data-petal="2">
+  <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
+  <div class="wrap">
+    <div class="top settle">
+      <h2 class="lead">So many of us can read and recite the Quran, yet don't know the meaning of what we recite.</h2>
+      <p class="mid">Studying the grammar of the Quran's Arabic opens <em>a new understanding of the Quran</em>, and a deeper connection with it.</p>
+    </div>
+    <div class="twice" id="twice">
+      <div class="ay">
+        <div class="tag">What you recite</div>
+        <p class="plain ar" lang="ar">خَلَقَ اللَّهُ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ</p>
+      </div>
+      <div class="ay on reader" id="reader">
+        <div class="tag">What you understand</div>
+        <div class="words" lang="ar">
+          <span class="wd" data-tr="khalaqa" data-g="Fi'l" data-c="f"><span class="ar f">خَلَقَ</span><small lang="en">He created</small></span>
+          <span class="wd" data-tr="Allah" data-g="Ism" data-c="i"><span class="ar i">اللَّهُ</span><small lang="en">Allah</small></span>
+          <span class="wd" data-tr="as-samaawaati" data-g="Ism" data-c="i"><span class="ar i">السَّمَاوَاتِ</span><small lang="en">the heavens</small></span>
+          <span class="wd" data-tr="wal-arda" data-g="Harf + Ism" data-c="h"><span class="ar"><span class="h">وَ</span><span class="i">الْأَرْضَ</span></span><small lang="en">and · the earth</small></span>
+          <span class="wd" data-tr="bil-haqqi" data-g="Harf + Ism" data-c="h"><span class="ar"><span class="h">بِ&zwj;</span><span class="i">&zwj;الْحَقِّ</span></span><small lang="en">in · the truth</small></span>
+        </div>
+        <p class="big-meaning" id="bigm" aria-hidden="true"></p>
+        <p class="mean">"Allah created the heavens and the earth in truth." Al-'Ankabut 29:44</p>
+      </div>
+    </div>
+    <div class="legend"><span class="i">Ism <small>(noun)</small></span><span class="f">Fi'l <small>(verb)</small></span><span class="h">Harf <small>(small linking word)</small></span></div>
+    <p class="caption">You start to see how an Ayah is built: which word is the doer, which is the action, and why the endings change.</p>
+  </div>
+</section>
 
-  <section class="plans" id="plans">
-    <h2>Plans</h2>
-    <p>Lessons 1 to 7 are free, with no card needed. Premium opens every lesson after that.</p>
+<!-- 3 · One small step -->
+<section class="scene s-green flip" id="s3" data-name="Daily" data-petal="3">
+  <div class="wrap">
+    <div class="copy settle">
+      <h2 class="head"><span>One</span><span>small step</span><span>a day</span></h2>
+      <p class="small"><span class="gold">5-minute lessons</span></p>
+    </div>
+    <p class="detail">Each lesson teaches one idea, then you use it on an Ayah from the Quran.</p>
+    <div class="stage">
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
+      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><video data-src="video/loop-daily.mp4" poster="img/loop-daily.jpg" muted playsinline loop preload="none" aria-label="A lesson done; Home then shows its words to practise next"></video></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · Practise -->
+<section class="scene s-orange" id="s4" data-name="Practise" data-petal="4">
+  <div class="wrap">
+    <div class="copy settle">
+      <h2 class="head"><span>Practise on</span><span class="pill">Quran Ayat</span></h2>
+      <p class="small">Grammar questions in every lesson</p>
+    </div>
+    <p class="detail">Each lesson ends on an Ayah from the Quran. You tap its words, check your answer, and see the reason straight away.</p>
+    <div class="stage">
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
+      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><video data-src="video/loop-practise.mp4" poster="img/loop-practise.jpg" muted playsinline loop preload="none" aria-label="A grammar question on Yusuf 12:2: two words tapped, then the answer"></video></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · Words -->
+<section class="scene s-blue centre" id="s5" data-name="Words" data-petal="5">
+  <div class="wrap">
+    <div class="copy settle">
+      <h2 class="head"><span>Memorize</span><span>common</span><span class="pill">Quran words</span></h2>
+      <p class="small">with spaced repetition cards</p>
+    </div>
+    <p class="detail">Words you know come back after 3, 7, 21, 60 and 120 days, just before you would forget them.</p>
+    <ol class="days" aria-hidden="true"><li><b>3</b>days</li><li><b>7</b>days</li><li><b>21</b>days</li><li><b>60</b>days</li><li><b>120</b>days</li></ol>
+    <div class="stage">
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
+      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><video data-src="video/loop-words.mp4" poster="img/loop-words.jpg" muted playsinline loop preload="none" aria-label="A word card: خَلَقَ turned to its meaning, then the next word"></video></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · Recite -->
+<section class="scene s-purple" id="s6" data-name="Recite" data-petal="6">
+  <div class="wrap">
+    <div class="copy settle">
+      <h2 class="head"><span>Recite with</span><span class="pill">understanding</span></h2>
+      <p class="small">Connect with the Quran</p>
+    </div>
+    <p class="detail">Every Ayah you meet in a lesson is saved in My Ayat, each word in its family colour, so you can come back, read it again and practise its words.</p>
+    <div class="stage">
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
+      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><video data-src="video/loop-recite.mp4" poster="img/loop-recite.jpg" muted playsinline loop preload="none" aria-label="Al-'Ankabut 29:44 word by word: the first word opens its card, turned to its meaning"></video></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Beauty -->
+<section class="scene s-green flip" id="s7" data-name="Beauty" data-petal="7">
+  <div class="wrap">
+    <div class="copy settle">
+      <h2 class="head"><span>See the</span><span>beauty of</span><span class="pill">Quran's Arabic</span></h2>
+      <p class="small">Start your Arabic appreciation journey</p>
+    </div>
+    <div class="stage">
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
+      <div class="lift"><div class="phone"><div class="scr"><i class="island"></i><img src="img/c-1.jpg" loading="lazy" alt="A bonus lesson page: three Arabic words for camel, each for a different age or use"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- What you'll learn (owner 2026-11-28, approved): the journey from bonus lesson 1.1.9 -->
+<section class="journey" id="learn" data-name="What you'll learn">
+  <div class="wrap jgrid">
+    <div class="settle">
+      <h2>What you'll learn</h2>
+      <p class="intro">By the end, you can look at an Ayah and see:</p>
+      <ul class="subjects">
+        <li class="n"><b>Nahw</b><span>how each word works in it</span></li>
+        <li class="s"><b>Sarf</b><span>where each word comes from</span></li>
+        <li class="b"><b>Balagha</b><span>why each word was chosen</span></li>
+      </ul>
+      <p class="start">You start with <b class="n">Nahw</b>, in Lesson 1.</p>
+    </div>
+    <figure class="jpic"><img class="lt" src="img/journey-light.jpg" alt="The journey as a path: Nahw, then Sarf, then Balagha, ending at a Quran stand" loading="lazy"><img class="dk" src="img/journey-dark.jpg" alt="The journey as a path: Nahw, then Sarf, then Balagha, ending at a Quran stand" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- 8 · Get Aqal -->
+<section class="get" id="get" data-name="Get Aqal" data-petal="8">
+  <div class="wrap get-grid">
+    <div class="get-text settle">
+      <h2>On iPhone, iPad and Android, and in the browser too.</h2>
+      <p class="intro">Lessons 1 to 7 are free, and Lesson 1 needs no account.</p>
+    </div>
+    <div class="family" role="img" aria-label="Aqal on an iPad, showing a word card turned to its meaning, and on a phone"><i class="glow"></i><div class="tab"><img src="img/ipad-words.jpg" alt="" loading="lazy"></div><div class="fph"><img src="img/loop-recite.jpg" alt="" loading="lazy"></div></div>
+    <div class="get-act">
+      <div class="stores">
+        <a class="badge-link" href="https://play.google.com/store/apps/details?id=academy.aqal.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dhome%26utm_campaign%3Dget"><img src="img/badge-google-play.png" alt="Get it on Google Play" width="564" height="168"></a>
+        <a class="badge-link" href="https://apps.apple.com/app/apple-store/id6825812428?pt=129655652&amp;ct=site-home-get&amp;mt=8"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+        <a class="badge-link badge-web" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=get"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/><path d="M2.8 12h18.4M12 2.8c2.9 3 2.9 15.4 0 18.4M12 2.8c-2.9 3-2.9 15.4 0 18.4" fill="none" stroke="#FFFFFF" stroke-width="1.8"/></svg><span><small>Start free in your</small>Browser</span></a>
+      </div>
+      <p class="web-line m-only">or <a class="web-link" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=getphone">start free in your browser</a> →</p>
+      <p class="get-note">Google Play for Android phones and tablets. App Store for iPhone and iPad.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 10 · Plans -->
+<section class="calm plans" id="plans" data-name="Plans">
+  <div class="wrap">
+    <div class="settle"><h2>Plans</h2><p class="intro">Lessons 1 to 7 are free, with no card needed. Premium opens every lesson after that.</p></div>
     <div class="tiers">
       <div class="tier"><h3>Free</h3><p class="price">$0</p><p class="per">Lessons 1 to 7, for as long as you like</p></div>
       <div class="tier"><h3>Monthly</h3><p class="price">$4.99</p><p class="per">per month</p></div>
-      <div class="tier pop"><span class="tag">Recommended</span><h3>Every 3 months</h3><p class="price">$12.99</p><p class="per">per 3 months</p></div>
-      <div class="tier"><h3>Yearly</h3><p class="price">$39.99</p><p class="per">per year</p></div>
+      <div class="tier pop-tier"><span class="tag">Recommended</span><h3>Every 3 months</h3><p class="price">$12.99</p><p class="per">per 3 months</p><p class="per month">about $4.33 a month</p><p class="why-rec">Time to finish Level 1</p></div>
+      <div class="tier"><h3>Yearly</h3><p class="price">$39.99</p><p class="per">per year</p><p class="per month">about $3.33 a month</p></div>
     </div>
-    <p class="small">Prices in US dollars. In the app they're shown in your currency and may be lower in some countries.
-      Premium renews automatically; cancel any time. Bought on the web? <a href="refund/">Full refund within 14 days</a>, no questions asked.</p>
-  </section>
+    <div class="after"><a class="btn" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=plans">Start free</a><p>Prices in US dollars; in the app they show in your currency and may be lower in some countries.<br>Premium renews automatically; cancel any time.<br>Within 14 days of a payment on the web or Google Play: your money back in full. On iPhone and iPad, Apple decides refunds. <a href="refund/">Refund policy</a></p></div>
+  </div>
+</section>
 
-  <section class="sources rise" id="sources">
+<!-- 11 · Sources -->
+<section class="calm sources" id="sources" data-name="Sources">
+  <div class="wrap settle">
     <h2>Sources you can check</h2>
-    <p>Aqal does not type Quran text from memory, and it does not estimate numbers. Each part comes from a named source:</p>
     <ul>
       <li><b>Quran text:</b> <a href="https://tanzil.net" rel="noopener">Tanzil Project</a>, Simple Enhanced edition, unchanged.</li>
       <li><b>English meanings of the Ayat:</b> Saheeh International.</li>
       <li><b>The grammar of each word, and how often it appears in the Quran:</b> <a href="https://corpus.quran.com" rel="noopener">Quranic Arabic Corpus</a>.</li>
     </ul>
-    <p>The full list is in the app, under Settings, About Aqal. Found a mistake? Write to <a href="mailto:aqal.app.academy@gmail.com">aqal.app.academy@gmail.com</a>: errors in Quran text or in an answer are fixed first.</p>
-  </section>
+    <p>Found a mistake? Write to <a href="mailto:aqal.app.academy@gmail.com">aqal.app.academy@gmail.com</a>: errors in Quran text or in an answer are fixed first.</p>
+  </div>
+</section>
 
-  <section class="join" id="join">
-    <div class="box rise">
-      <div>
-        <h2>Get one email when Aqal launches.</h2>
-        <p>We write once, when Aqal is on Google Play and the App Store. Nothing else unless you sign up for more in the app.</p>
-      </div>
-      <form id="wait" novalidate>
-        <label for="email">Your email</label>
-        <div class="row">
-          <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="hint" />
-          <button class="btn" type="submit" id="go">Join the waiting list</button>
-        </div>
-        <div class="hint" id="hint" aria-live="polite"></div>
-      </form>
+<!-- 12 · Questions -->
+<section class="calm faq" id="faq" data-name="Questions">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <div class="qs">
+      <details><summary>Do I need to know Arabic already?</summary><p>You need to read Arabic script, as you do when you recite. Aqal starts from there: no grammar, vocabulary or Arabic speaking needed.</p></details>
+      <details><summary>Who is Aqal for?</summary><p>Teens and adults who can already read Arabic script, as you do when you recite.</p></details>
+      <details><summary>Does Aqal teach the alphabet or tajweed?</summary><p>No. Aqal teaches the grammar and the words of the Quran, so you understand what you recite.</p></details>
+      <details><summary>How long is a lesson?</summary><p>About 5 minutes. After a lesson come its words to practise and its Ayah.</p></details>
+      <details><summary>What is free?</summary><p>Lessons 1 to 7, the bonus lessons that open along the way, and practice of every word and Ayah you have unlocked. Lesson 1 needs no account.</p></details>
+      <details><summary>Which devices does it work on?</summary><p>Android phones and tablets, iPhone, iPad, and any web browser at aqal.academy/app. One account and one Premium cover all of them.</p></details>
+      <details><summary>How do I cancel or get a refund?</summary><p>Cancel any time. Within 14 days of a payment on the web or Google Play, you get your money back in full. On iPhone and iPad, Apple decides refunds.</p></details>
+      <details><summary>Where does the Quran text come from?</summary><p>The Tanzil Project, unchanged. Meanings come from Saheeh International, and each word's grammar from the Quranic Arabic Corpus.</p></details>
     </div>
-  </section>
-</div>
+  </div>
+</section>
+
 </main>
+
+<section class="closing" id="end" data-name="Get Aqal">
+  <div class="wrap settle">
+    <h2>Understand what you recite</h2>
+    <div class="stores">
+        <a class="badge-link" href="https://play.google.com/store/apps/details?id=academy.aqal.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dhome%26utm_campaign%3Dend"><img src="img/badge-google-play.png" alt="Get it on Google Play" width="564" height="168"></a>
+        <a class="badge-link" href="https://apps.apple.com/app/apple-store/id6825812428?pt=129655652&amp;ct=site-home-end&amp;mt=8"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+        <a class="badge-link badge-web" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=end"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/><path d="M2.8 12h18.4M12 2.8c2.9 3 2.9 15.4 0 18.4M12 2.8c-2.9 3-2.9 15.4 0 18.4" fill="none" stroke="#FFFFFF" stroke-width="1.8"/></svg><span><small>Start free in your</small>Browser</span></a>
+      </div>
+      <p class="web-line m-only">or <a class="web-link" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=endphone">start free in your browser</a> →</p>
+    <p class="free-line">Lessons 1 to 7 are free. Lesson 1 needs no account.</p>
+  </div>
+</section>
 
 <div class="wrap">
   <footer>
     <span>Aqal Academy</span>
     <span><a href="privacy/">Privacy policy</a> &nbsp; <a href="terms/">Terms of use</a> &nbsp; <a href="refund/">Refund policy</a> &nbsp; <a href="delete-account/">Delete your account</a></span>
     <span>Questions? <a href="mailto:aqal.app.academy@gmail.com">aqal.app.academy@gmail.com</a></span>
-    <nav class="social" aria-label="Aqal Academy on social media">
-      <span>Follow us:</span>
-      <a href="https://www.instagram.com/aqal.academy/" rel="me noopener" target="_blank">Instagram</a>
-      <a href="https://www.facebook.com/aqal.academy/" rel="me noopener" target="_blank">Facebook</a>
-      <a href="https://www.youtube.com/@aqal.academy" rel="me noopener" target="_blank">YouTube</a>
-      <a href="https://www.tiktok.com/@aqal_academy" rel="me noopener" target="_blank">TikTok</a>
-      <a href="https://discord.gg/aW6V7PMSh" rel="noopener" target="_blank">Discord</a>
-    </nav>
+    <nav aria-label="Aqal Academy on social media"><span>Follow us:</span><a href="https://www.instagram.com/aqal.academy/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/aqal.academy/" rel="me noopener" target="_blank">Facebook</a><a href="https://www.youtube.com/@aqal.academy" rel="me noopener" target="_blank">YouTube</a><a href="https://www.tiktok.com/@aqal_academy" rel="me noopener" target="_blank">TikTok</a><a href="https://discord.gg/aW6V7PMSh" rel="me noopener" target="_blank">Discord</a></nav>
   </footer>
 </div>
 
-<script src="config.js"></script>
 <script>
-  // entrances, once, as each part comes into view
-  const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.2 }) : null;
-  document.querySelectorAll('.rise, .ayah').forEach((el) => (io ? io.observe(el) : el.classList.add('in')));
-  document.querySelectorAll('.ayah .word').forEach((w, i) => (w.style.transitionDelay = i * 0.18 + 's'));
+document.documentElement.classList.add("js");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // waiting list: insert-only into Supabase (nobody can read the list from here)
-  const form = document.getElementById('wait');
-  const hint = document.getElementById('hint');
-  const go = document.getElementById('go');
-  const say = (t, kind) => { hint.textContent = t; hint.className = 'hint' + (kind ? ' ' + kind : ''); };
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = form.email.value.trim();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return say('Please enter a full email address, like name@example.com.', 'bad');
-    const cfg = window.AQAL || {};
-    if (!cfg.url || !cfg.key) return say('The waiting list opens soon. Please try again later.', 'bad');
-    go.disabled = true; go.textContent = 'Adding you...';
-    try {
-      const r = await fetch(cfg.url + '/rest/v1/waitlist', {
-        method: 'POST',
-        headers: { apikey: cfg.key, Authorization: 'Bearer ' + cfg.key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        body: JSON.stringify({ email, source: 'website' }),
-      });
-      if (r.ok) { say("You're on the list. We'll email you when Aqal launches.", 'ok'); form.reset(); }
-      else if (r.status === 409) say("You're already on the list. We'll email you when Aqal launches.", 'ok');
-      else say('Something went wrong. Please try again in a minute.', 'bad');
-    } catch { say("Couldn't reach us. Check your connection and try again.", 'bad'); }
-    go.disabled = false; go.textContent = 'Join the waiting list';
-  });
-</script>
-<script>
-// one Start free at a time: the top bar shows its own once the big one has scrolled out of view (owner 2026-11-23)
+// ── settle in, pop cards, timed phone rise: each once, as it comes into view ──
+const once = (sel, threshold) => {
+  if (!("IntersectionObserver" in window)) { document.querySelectorAll(sel).forEach((el) => el.classList.add("in")); return; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold });
+  document.querySelectorAll(sel).forEach((el) => io.observe(el));
+};
+once(".settle, .hero, #twice, .get", 0.3);
+once(".phone", 0.35);
+setTimeout(() => document.querySelectorAll(".hero, .hero .settle").forEach((el) => el.classList.add("in")), 60);
+
+
+// ── scene 2: the Reader goes round the words, right to left, while the card is on screen (owner 2026-11-28) ──
 (function () {
-  var nav = document.getElementById("nav-start"), hero = document.getElementById("hero-start");
-  if (!nav || !hero || !("IntersectionObserver" in window)) return;
-  document.documentElement.classList.add("js");
-  new IntersectionObserver(function (e) { nav.classList.toggle("on", !e[0].isIntersecting); }).observe(hero);
+  const card = document.getElementById("reader"), big = document.getElementById("bigm");
+  if (!card || reduce || !("IntersectionObserver" in window)) return;
+  const wds = [...card.querySelectorAll(".wd")]; let i = 0, t = null;
+  let held = false;
+  card.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") held = true; });
+  card.addEventListener("pointerleave", () => { held = false; });
+  card.addEventListener("focusin", () => { held = true; }); card.addEventListener("focusout", () => { held = false; });
+  const step = () => { if (held) return; wds.forEach((w, k) => w.classList.toggle("on", k === i)); big.style.opacity = 0;
+    setTimeout(() => { const w = wds[i]; big.replaceChildren();
+      const m = w.querySelector("small").textContent;
+      for (const [cls, text] of [["tr", w.dataset.tr.toLowerCase() === m.toLowerCase() ? "" : w.dataset.tr], ["m", m], ["g " + w.dataset.c, w.dataset.g]]) { if (!text) continue; const e = document.createElement("span"); e.className = cls; e.textContent = text; big.appendChild(e); }
+      big.style.opacity = 1; i = (i + 1) % wds.length; }, 160); };
+  new IntersectionObserver((es) => { if (es[0].isIntersecting) { if (!t) { step(); t = setInterval(step, 1600); } } else { clearInterval(t); t = null; } }, { threshold: 0.4 }).observe(card);
 })();
+
+// ── the phones: someone using the app, three screens, then again (owner 2026-11-28). Plays only while the phone is
+//    on screen, one at a time; nothing to press. With reduced motion the first screen stays still.
+(function () {
+  if (reduce || !("IntersectionObserver" in window)) return;
+  const vids = [...document.querySelectorAll(".phone video")], seen = new Map();
+  const need = (v) => (v.closest(".hero") ? 0.25 : 0.5); // the opening phone is tall and starts low on short phones
+  const play = (v) => { if (!v.src) v.src = v.dataset.src; vids.forEach((o) => { if (o !== v) o.pause(); }); v.play().catch(() => {}); };
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => seen.set(e.target, e.isIntersecting ? e.intersectionRatio : 0));
+    const ok = vids.filter((v) => (seen.get(v) || 0) >= need(v));
+    if (!ok.length) { vids.forEach((v) => v.pause()); return; }
+    const best = ok.reduce((x, y) => ((seen.get(y) || 0) > (seen.get(x) || 0) ? y : x));
+    if (best.paused) play(best);
+  }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+  vids.forEach((v) => io.observe(v));
+})();
+
+// ── the floating nav: shows once the opening's buttons are gone; the rosette fills one petal per scene ──
+const DAWN = ["#3A3F8F", "#5B4BA8", "#8E5BB0", "#C8669A", "#EE8A72", "#F4B05A", "#F6D36B"];
+const ros = document.getElementById("rosette");
+ros.innerHTML = DAWN.map((_, i) => `<ellipse class="p" cx="0" cy="-10.5" rx="5" ry="8.5" transform="rotate(${(360 / 7) * i})"/>`).join("") + `<circle class="c" r="4.6"/>`;
+const petals = [...ros.querySelectorAll(".p")];
+const fnav = document.getElementById("fnav"), where = document.getElementById("where"), heroStores = document.getElementById("hero-stores");
+// the floating "Get Aqal" goes straight to this phone's store (Android: Google Play; iPhone, iPad: App Store), tagged
+// "nav"; on a computer it goes to Get Aqal, which shows every way in (owner 2026-11-28: no tapping twice)
+fnav.querySelector(".btn").addEventListener("click", (ev) => {
+  const ua = navigator.userAgent, apple = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  const a = /Android/.test(ua) ? heroStores.querySelector('a[href*="play.google.com"]') : apple ? heroStores.querySelector('a[href*="apps.apple.com"]') : null;
+  if (a) ev.currentTarget.href = a.href.replace("utm_campaign%3Dhero", "utm_campaign%3Dnav").replace("ct=site-home-hero", "ct=site-home-nav");
+});
+const hasIO = "IntersectionObserver" in window; // without it the floating menu simply stays hidden
+if (hasIO) new IntersectionObserver((es) => fnav.classList.toggle("on", !es[0].isIntersecting), { rootMargin: "0px 0px 100000px 0px" }).observe(heroStores);
+// and steps aside while any row of store buttons is on screen
+if (hasIO) {
+  const shown = new Set();
+  const storesIO = new IntersectionObserver((es) => {
+    es.forEach((e) => (e.isIntersecting ? shown.add(e.target) : shown.delete(e.target)));
+    fnav.classList.toggle("by-stores", shown.size > 0);
+  });
+  document.querySelectorAll(".stores").forEach((el) => storesIO.observe(el));
+}
+let reached = 0, done = false;
+const fill = (n) => {
+  for (let i = 0; i < 7; i++) petals[i].style.fill = i < Math.min(n, 7) ? DAWN[i] : "";
+  if (n >= 8 && !done) {
+    done = true; ros.classList.add("done");
+    if (!reduce) {
+      const w = document.getElementById("ros"); w.classList.add("burst");
+      for (let k = 0; k < 6; k++) { const s = document.createElement("i"); s.className = "speck"; const a = (Math.PI * 2 * k) / 6 + 0.4; s.style.setProperty("--dx", `${Math.cos(a) * 26 - 2}px`); s.style.setProperty("--dy", `${Math.sin(a) * 26 - 2}px`); w.appendChild(s); setTimeout(() => s.remove(), 1500); }
+    }
+  }
+};
+const obsName = hasIO && new IntersectionObserver((es) => es.forEach((e) => {
+  if (!e.isIntersecting) return;
+  where.textContent = e.target.dataset.name;
+  fnav.classList.toggle("away", ["get", "plans", "end"].includes(e.target.id)); // never "Get Aqal" twice, never over the store buttons
+  const p = Number(e.target.dataset.petal || 0);
+  if (p > reached) { reached = p; fill(p); }
+}), { rootMargin: "-45% 0px -45% 0px" });
+if (obsName) document.querySelectorAll("[data-name]").forEach((el) => obsName.observe(el));
 </script>
 </body>
 </html>
