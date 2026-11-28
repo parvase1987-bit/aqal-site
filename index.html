@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aqal Academy: Learn Quranic Arabic and Understand the Quran</title>
+<title>Learn Arabic Grammar for the Quran | Aqal Academy</title>
 <meta name="description" content="Understand the Quran. Aqal teaches the Arabic grammar behind every Ayah in 5-minute lessons, keeps the words you learn with spaced review, and shows each Ayah word by word. For Android and iPhone." />
 <link rel="canonical" href="https://aqal.academy/" />
 <meta name="google-site-verification" content="iA2pXs8bXxGPje5aFsLT4KGIwpojlnBi0AONgMb6NvA" />
 <meta name="theme-color" content="#0B7F62" />
 <link rel="icon" href="img/icon.png" />
 <meta property="og:site_name" content="Aqal Academy" />
-<meta property="og:title" content="Aqal Academy: Learn Quranic Arabic and Understand the Quran" />
+<meta property="og:title" content="Learn Arabic Grammar for the Quran | Aqal Academy" />
 <meta property="og:description" content="Understand the Quran. Learn the grammar behind every Ayah, 5 minutes a day." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://aqal.academy/" />
@@ -23,8 +23,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Aqal Academy","alternateName":"Aqal","url":"https://aqal.academy/","logo":"https://aqal.academy/img/icon.png","email":"aqal.app.academy@gmail.com","sameAs":["https://www.instagram.com/aqal.academy/","https://www.facebook.com/aqal.academy/","https://www.youtube.com/@aqal.academy","https://www.tiktok.com/@aqal_academy"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"Aqal","alternateName":"Aqal Academy","url":"https://aqal.academy/","applicationCategory":"EducationalApplication","operatingSystem":"Android, iOS","description":"Quranic Arabic grammar in 5-minute lessons, word meanings with spaced review, and every Ayah word by word.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Lessons 1 to 7 free; Premium for the rest"}}</script>
 <!-- aqal.academy landing page (owner 2026-10-14). Real app screenshots in img/ (taken from the app's web build).
-     The waiting-list form adds an email to Supabase public.waitlist (insert-only; migration 20261014130000).
-     config.js holds the public Supabase URL and publishable key (the same ones inside the app; written by the main repo's website/make-config.cjs). -->
+     Launch-day safety net (2026-11-28): the store buttons are on, the waiting list is gone; PT_PROVIDER_ID: see quran-app docs/link-tags.md. -->
 <style>
   @font-face { font-family: "Bricolage"; src: url(fonts/BricolageGrotesque_800ExtraBold.ttf) format("truetype"); font-weight: 800; font-display: swap; }
   @font-face { font-family: "Figtree"; src: url(fonts/Figtree_400Regular.ttf) format("truetype"); font-weight: 400; font-display: swap; }
@@ -68,6 +67,7 @@
   .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 40px 0 72px; min-height: calc(100dvh - 68px); }
   .hero h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1.04; }
   .hero h1 em { font-style: normal; color: var(--brand); }
+  .hero p.sub { font-size: 22px; font-weight: 700; color: var(--fg); margin: 16px 0 0; }
   .hero p { font-size: 20px; color: var(--muted); max-width: 34ch; margin: 20px 0 30px; }
   .hero p.soon { font-size: 15px; max-width: 40ch; margin: 14px 0 0; }
   .hero p.soon a { color: var(--brand); font-weight: 700; white-space: nowrap; }
@@ -130,19 +130,6 @@
   .sources ul { color: var(--muted); margin: 14px 0 0; padding-left: 22px; max-width: 70ch; }
   .sources li { margin: 6px 0; }
   .sources b { color: var(--fg); }
-  /* waiting list */
-  .join { padding: 30px 0 90px; }
-  .join .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
-  .join h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; }
-  .join p { color: var(--muted); margin: 12px 0 0; }
-  form { display: grid; gap: 8px; }
-  label { font-weight: 700; }
-  .row { display: flex; gap: 10px; }
-  input[type=email] { flex: 1; min-height: 52px; border-radius: 14px; border: 2px solid var(--line); background: var(--bg); color: var(--fg); padding: 0 16px; font: 400 17px "Figtree", sans-serif; }
-  input[type=email]:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px var(--brand-soft); }
-  .hint { font-size: 14px; color: var(--muted); min-height: 1.4em; }
-  .hint.ok { color: var(--brand); font-weight: 700; } .hint.bad { color: var(--bad); font-weight: 700; }
-
   footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 15px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   footer .social { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 4px 20px; height: auto; } /* not the top bar's space-between (owner 2026-11-23) */
   footer .social a { display: inline-block; padding: 10px 0; font-weight: 700; }
@@ -197,20 +184,16 @@
 <div class="wrap">
   <header class="hero">
     <div class="rise">
-      <h1>Understand the <em>Quran.</em></h1>
+      <h1>Learn Arabic Grammar <em>for the Quran.</em></h1>
+      <p class="sub">Understand what you recite</p>
       <p>Every day: a 5-minute lesson in Arabic grammar, Quranic words to practice, and an Ayah to decode.</p>
       <a class="btn" id="hero-start" href="/app/?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero">Start free</a>
       <p class="soon">For teens and adults who can already read Arabic script. Aqal doesn't teach the alphabet or tajweed.</p>
-      <p class="soon">Lessons 1 to 7 are free, right here in your browser. Android and iPhone apps coming soon: <a href="#join">join the waiting list</a>.</p>
-      <!-- LAUNCH DAY (1 Dec, the same hour both stores are live): delete the "coming soon" line above, take the two store
-           buttons below out of this comment, and replace PT_PROVIDER_ID with the owner's App Store provider id
-           (App Store Connect > Apps > Aqal > App Analytics > Acquisition > "Generate a campaign link" shows it as pt=).
-           Every shared link is tagged the same way: see docs/link-tags.md in the quran-app repo.
+      <p class="soon">Lessons 1 to 7 are free, with no card needed.</p>
       <p class="stores">
         <a class="btn" href="https://play.google.com/store/apps/details?id=academy.aqal.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dhome%26utm_campaign%3Dhero">Get it on Google Play</a>
         <a class="btn" href="https://apps.apple.com/app/apple-store/id6825812428?pt=PT_PROVIDER_ID&amp;ct=site-home-hero&amp;mt=8">Download on the App Store</a>
       </p>
-      -->
     </div>
     <div class="phone rise"><img src="img/ayat.webp" width="680" height="1284" fetchpriority="high" alt="Aqal showing Al-'Ankabut 29:44 word by word, each word colored by its family: Ism, Fi'l or Harf" /></div>
   </header>
@@ -277,7 +260,7 @@
       <div class="tier"><h3>Yearly</h3><p class="price">$39.99</p><p class="per">per year</p></div>
     </div>
     <p class="small">Prices in US dollars. In the app they're shown in your currency and may be lower in some countries.
-      Premium renews automatically; cancel any time. Bought on the web? <a href="refund/">Full refund within 14 days</a>, no questions asked.</p>
+      Premium renews automatically; cancel any time. Within 14 days of a payment on the web or Google Play: <a href="refund/">your money back in full</a>. On iPhone and iPad, Apple decides refunds.</p>
   </section>
 
   <section class="sources rise" id="sources">
@@ -291,22 +274,6 @@
     <p>The full list is in the app, under Settings, About Aqal. Found a mistake? Write to <a href="mailto:aqal.app.academy@gmail.com">aqal.app.academy@gmail.com</a>: errors in Quran text or in an answer are fixed first.</p>
   </section>
 
-  <section class="join" id="join">
-    <div class="box rise">
-      <div>
-        <h2>Get one email when Aqal launches.</h2>
-        <p>We write once, when Aqal is on Google Play and the App Store. Nothing else unless you sign up for more in the app.</p>
-      </div>
-      <form id="wait" novalidate>
-        <label for="email">Your email</label>
-        <div class="row">
-          <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="hint" />
-          <button class="btn" type="submit" id="go">Join the waiting list</button>
-        </div>
-        <div class="hint" id="hint" aria-live="polite"></div>
-      </form>
-    </div>
-  </section>
 </div>
 </main>
 
@@ -333,30 +300,6 @@
   document.querySelectorAll('.rise, .ayah').forEach((el) => (io ? io.observe(el) : el.classList.add('in')));
   document.querySelectorAll('.ayah .word').forEach((w, i) => (w.style.transitionDelay = i * 0.18 + 's'));
 
-  // waiting list: insert-only into Supabase (nobody can read the list from here)
-  const form = document.getElementById('wait');
-  const hint = document.getElementById('hint');
-  const go = document.getElementById('go');
-  const say = (t, kind) => { hint.textContent = t; hint.className = 'hint' + (kind ? ' ' + kind : ''); };
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = form.email.value.trim();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return say('Please enter a full email address, like name@example.com.', 'bad');
-    const cfg = window.AQAL || {};
-    if (!cfg.url || !cfg.key) return say('The waiting list opens soon. Please try again later.', 'bad');
-    go.disabled = true; go.textContent = 'Adding you...';
-    try {
-      const r = await fetch(cfg.url + '/rest/v1/waitlist', {
-        method: 'POST',
-        headers: { apikey: cfg.key, Authorization: 'Bearer ' + cfg.key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        body: JSON.stringify({ email, source: 'website' }),
-      });
-      if (r.ok) { say("You're on the list. We'll email you when Aqal launches.", 'ok'); form.reset(); }
-      else if (r.status === 409) say("You're already on the list. We'll email you when Aqal launches.", 'ok');
-      else say('Something went wrong. Please try again in a minute.', 'bad');
-    } catch { say("Couldn't reach us. Check your connection and try again.", 'bad'); }
-    go.disabled = false; go.textContent = 'Join the waiting list';
-  });
 </script>
 <script>
 // one Start free at a time: the top bar shows its own once the big one has scrolled out of view (owner 2026-11-23)
