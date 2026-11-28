@@ -128,6 +128,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.0
 .free-line { margin: 14px 0 0; font-size: 16px; font-weight: 700; }
 .brand { display: flex; align-items: center; gap: 10px; margin: 0 0 22px; font: 800 24px var(--display); letter-spacing: -0.01em; }
 .brand img { width: 40px; height: 40px; border-radius: 11px; box-shadow: 0 2px 0 rgba(0, 0, 0, .18); }
+/* the Aqal icon above each section's words (owner 2026-11-28) */
+.mark { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; font: 800 17px var(--display); letter-spacing: -0.01em; opacity: .92; }
+.mark img { width: 26px; height: 26px; border-radius: 7px; flex: none; }
+.centre .mark, .why .mark { justify-content: center; }
+.end-icon { display: block; margin: 0 auto 18px; width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 6px 18px -6px rgba(0, 0, 0, .35); }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* the opening's "5-minute lessons": a plain line in gold, nothing that looks pressable (owner 2026-11-28) */
 .s-green { background: #0B7F62; --c: #0B7F62; }
 .s-orange { background: #F4A640; --c: #F4A640; color: #2A1700; } .s-orange .head .pill { color: #F4A640; } .s-orange .head .pill::before { background: #2A1700; } .s-orange .star path { fill: #7A3E00; opacity: .12; }
@@ -366,7 +372,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
   .badge-link img { height: 48px; }
   .get .badge-web, .closing .badge-web, .hero .badge-web { display: none; } .m-only { display: block; }
   /* the opening, version B (owner 2026-11-28): the phone straight after the headline, the buttons under it */
-  .hero .brand { font-size: 18px; gap: 8px; margin-bottom: 14px; } .hero .brand img { width: 28px; height: 28px; border-radius: 8px; }
+  .hero .brand { font-size: 18px; gap: 8px; margin-bottom: 22px; line-height: 1.2; } .hero .brand img { width: 28px; height: 28px; border-radius: 8px; }
   .hero > .wrap { display: flex; flex-direction: column; }
   .hero .copy { display: contents; }
   .hero .brand { order: 1; } .hero .head { order: 2; } .hero .small { order: 3; }
@@ -434,6 +440,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
   <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 23 L83 17 L77 39 L96 50 L77 61 L83 83 L61 77 L50 96 L39 77 L17 83 L23 61 L4 50 L23 39 L17 17 L39 23 Z"/></svg>
   <div class="wrap">
     <div class="top settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2 class="lead">So many of us can read and recite the Quran, yet don't know the meaning of what we recite.</h2>
       <p class="mid">Studying the grammar of the Quran's Arabic opens <em>a new understanding of the Quran</em>, and a deeper connection with it.</p>
     </div>
@@ -464,6 +471,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <section class="scene s-green flip" id="s3" data-name="Daily" data-petal="3">
   <div class="wrap">
     <div class="copy settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2 class="head"><span>One</span><span>small step</span><span>a day</span></h2>
       <p class="small"><span class="gold">5-minute lessons</span></p>
     </div>
@@ -479,6 +487,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <section class="scene s-orange" id="s4" data-name="Practise" data-petal="4">
   <div class="wrap">
     <div class="copy settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2 class="head"><span>Practise on</span><span class="pill">Quran Ayat</span></h2>
       <p class="small">Grammar questions in every lesson</p>
     </div>
@@ -494,6 +503,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <section class="scene s-blue centre" id="s5" data-name="Words" data-petal="5">
   <div class="wrap">
     <div class="copy settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2 class="head"><span>Memorize</span><span>common</span><span class="pill">Quran words</span></h2>
       <p class="small">with spaced repetition cards</p>
     </div>
@@ -510,6 +520,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <section class="scene s-purple" id="s6" data-name="Recite" data-petal="6">
   <div class="wrap">
     <div class="copy settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2 class="head"><span>Recite with</span><span class="pill">understanding</span></h2>
       <p class="small">Connect with the Quran</p>
     </div>
@@ -525,6 +536,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <section class="scene s-green flip" id="s7" data-name="Beauty" data-petal="7">
   <div class="wrap">
     <div class="copy settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2 class="head"><span>See the</span><span>beauty of</span><span class="pill">Quran's Arabic</span></h2>
       <p class="small">Start your Arabic appreciation journey</p>
     </div>
@@ -539,6 +551,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <section class="journey" id="learn" data-name="What you'll learn">
   <div class="wrap jgrid">
     <div class="settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2>What you'll learn</h2>
       <p class="intro">By the end, you can look at an Ayah and see:</p>
       <ul class="subjects">
@@ -556,6 +569,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <section class="get" id="get" data-name="Get Aqal" data-petal="8">
   <div class="wrap get-grid">
     <div class="get-text settle">
+      <p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p>
       <h2>On iPhone, iPad and Android, and in the browser too.</h2>
       <p class="intro">Lessons 1 to 7 are free, and Lesson 1 needs no account.</p>
     </div>
@@ -576,7 +590,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 <!-- 10 · Plans -->
 <section class="calm plans" id="plans" data-name="Plans">
   <div class="wrap">
-    <div class="settle"><h2>Plans</h2><p class="intro">Lessons 1 to 7 are free, with no card needed. Premium opens every lesson after that.</p></div>
+    <div class="settle"><p class="mark"><img src="img/icon.png" alt="" width="26" height="26">Aqal</p><h2>Plans</h2><p class="intro">Lessons 1 to 7 are free, with no card needed. Premium opens every lesson after that.</p></div>
     <div class="tiers">
       <div class="tier"><h3>Free</h3><p class="price">$0</p><p class="per">Lessons 1 to 7, for as long as you like</p></div>
       <div class="tier"><h3>Monthly</h3><p class="price">$4.99</p><p class="per">per month</p></div>
@@ -621,6 +635,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 
 <section class="closing" id="end" data-name="Get Aqal">
   <div class="wrap settle">
+    <img class="end-icon" src="img/icon.png" alt="Aqal" width="72" height="72">
     <h2>Understand what you recite</h2>
     <div class="stores">
         <a class="badge-link" href="https://play.google.com/store/apps/details?id=academy.aqal.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dhome%26utm_campaign%3Dend"><img src="img/badge-google-play.png" alt="Get it on Google Play" width="564" height="168"></a>
