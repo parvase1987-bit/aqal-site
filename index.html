@@ -697,6 +697,13 @@ const ros = document.getElementById("rosette");
 ros.innerHTML = DAWN.map((_, i) => `<ellipse class="p" cx="0" cy="-10.5" rx="5" ry="8.5" transform="rotate(${(360 / 7) * i})"/>`).join("") + `<circle class="c" r="4.6"/>`;
 const petals = [...ros.querySelectorAll(".p")];
 const fnav = document.getElementById("fnav"), where = document.getElementById("where"), heroStores = document.getElementById("hero-stores");
+// the floating "Get Aqal" goes straight to this phone's store (Android: Google Play; iPhone, iPad: App Store), tagged
+// "nav"; on a computer it goes to Get Aqal, which shows every way in (owner 2026-11-28: no tapping twice)
+fnav.querySelector(".btn").addEventListener("click", (ev) => {
+  const ua = navigator.userAgent, apple = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  const a = /Android/.test(ua) ? heroStores.querySelector('a[href*="play.google.com"]') : apple ? heroStores.querySelector('a[href*="apps.apple.com"]') : null;
+  if (a) ev.currentTarget.href = a.href.replace("utm_campaign%3Dhero", "utm_campaign%3Dnav").replace("ct=site-home-hero", "ct=site-home-nav");
+});
 const hasIO = "IntersectionObserver" in window; // without it the floating menu simply stays hidden
 if (hasIO) new IntersectionObserver((es) => fnav.classList.toggle("on", !es[0].isIntersecting), { rootMargin: "0px 0px 100000px 0px" }).observe(heroStores);
 // and steps aside while any row of store buttons is on screen

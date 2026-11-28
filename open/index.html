@@ -39,14 +39,14 @@
 
       if (err) {
         $('title').textContent = "That link didn't work";
-        $('line').textContent = err.replace(/\+/g, ' ') + '. Links work once and expire after a day: ask for a new one in the app.';
+        $('line').textContent = 'Links work once and expire after a day: ask for a new one in the app.'; // a fixed sentence, never text from the address (security review 28 Nov)
         return;
       }
       if (reset) {
         $('title').textContent = 'Choose a new password';
         $('line').textContent = 'Opening Aqal…';
       }
-      var safe = /^(aqal|exps?):\/\//.test(to);
+      var safe = /^aqal:\/\//.test(to); // only the app's own address: no Expo test links after launch (security review 28 Nov)
       var phone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
       if (!safe || (!code && !pass) || !phone) {
         $('line').textContent = reset
