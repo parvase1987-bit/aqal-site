@@ -101,11 +101,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.0
 .badge-web { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; aspect-ratio: 3 / 1; height: auto; padding: 0 18px 0 14px; border-radius: 10px; background: #000000; border: 1.5px solid #A6A6A6; color: #FFFFFF; text-decoration: none; font: 400 25px/1 var(--body); letter-spacing: -0.01em; line-height: 1; }
 /* its words and globe scale with the badge's own width, like the official artwork: never wrapping (owner 2026-11-28) */
 .badge-web { container-type: inline-size; gap: 0; padding: 0; }
-.badge-web svg { width: 16cqw; height: 16cqw; flex: none; }
-.badge-web span { display: grid; gap: 1.5cqw; margin-left: 5cqw; font-size: 14cqw; line-height: 1; white-space: nowrap; }
+.badge-web svg { width: 24px; height: 24px; width: 16cqw; height: 16cqw; flex: none; }
+.badge-web span { display: grid; gap: 3px; gap: 1.5cqw; margin-left: 8px; margin-left: 5cqw; font-size: 19px; font-size: 14cqw; line-height: 1; white-space: nowrap; }
 .m-only { display: none; }
 .web-line { margin: 14px 0 0; font-size: 16px; }
-.badge-web small { font: 400 6.8cqw/1 var(--body); letter-spacing: .01em; }
+.badge-web small { font: 400 10px/1 var(--body); font-size: 6.8cqw; letter-spacing: .01em; }
 .web-link { font-weight: 700; text-underline-offset: 4px; }
 
 /* ── the scenes ── */
@@ -233,7 +233,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .jgrid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
 .journey h2 { font-size: clamp(30px, 3.8vw, 46px); line-height: 1.1; }
 .journey .intro { margin: 14px 0 0; font-size: 18px; color: var(--muted); }
-.subjects { list-style: none; margin: 18px 0 0; padding: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.subjects { list-style: none; margin: 18px 0 0; padding: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); overflow: hidden; }
 .subjects li { display: grid; grid-template-columns: 96px 1fr; align-items: baseline; gap: 12px; padding: 14px 18px; font-size: 18px; }
 .subjects li + li { border-top: 1px solid var(--line); }
 .subjects b { font: 800 20px var(--display); }
@@ -694,25 +694,25 @@ document.documentElement.classList.add("js");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ── settle in, pop cards, timed phone rise: each once, as it comes into view ──
-const once = (sel, threshold) => {
+const once = (sel) => {
   if (!("IntersectionObserver" in window)) { document.querySelectorAll(sel).forEach((el) => el.classList.add("in")); return; }
-  // plays every time (owner 2026-11-28): fades in when enough shows, resets only once fully off screen
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (e.isIntersecting && e.intersectionRatio >= threshold) e.target.classList.add("in");
-    else if (!e.isIntersecting) e.target.classList.remove("in");
-  }), { threshold: [0, threshold] });
-  document.querySelectorAll(sel).forEach((el) => io.observe(el));
+  // plays every time (owner 2026-11-28): shows once its top passes a line 20% up from the bottom of the screen (works for a
+  // part of any height, unlike a share-of-the-part threshold), and resets only once it is fully off screen
+  const show = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in"); }), { rootMargin: "0px 0px -20% 0px" });
+  const hide = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) e.target.classList.remove("in"); }));
+  document.querySelectorAll(sel).forEach((el) => { show.observe(el); hide.observe(el); });
 };
-once(".settle, .hero, #twice, .get", 0.3);
-once(".phone", 0.35);
-once(".family, .tiers", 0.3);
+once(".settle, .hero, #twice, .get");
+once(".phone");
+once(".family, .tiers");
 // the opening phone swings as you scroll past it: --sw goes 0 (page top) to 1 (opening scrolled away)
 (function () {
   const hero = document.querySelector(".hero"), lift = hero && hero.querySelector(".lift");
   if (!lift || reduce) return;
   let ticking = false;
   const upd = () => { ticking = false; const p = Math.min(1, Math.max(0, scrollY / Math.max(1, hero.offsetHeight))); lift.style.setProperty("--sw", p.toFixed(3)); };
-  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  const ask = () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } };
+  addEventListener("scroll", ask, { passive: true }); addEventListener("resize", ask);
   upd();
 })();
 setTimeout(() => document.querySelectorAll(".hero, .hero .settle").forEach((el) => el.classList.add("in")), 60);
