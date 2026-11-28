@@ -99,11 +99,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.0
 .badge-link img { width: 100%; height: auto; display: block; }
 /* the browser, drawn like the two store badges (black, thin grey edge, same height) */
 .badge-web { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; aspect-ratio: 3 / 1; height: auto; padding: 0 18px 0 14px; border-radius: 10px; background: #000000; border: 1.5px solid #A6A6A6; color: #FFFFFF; text-decoration: none; font: 400 25px/1 var(--body); letter-spacing: -0.01em; line-height: 1; }
-.badge-web svg { width: 30px; height: 30px; flex: none; }
-.badge-web span { display: grid; gap: 3px; }
+/* its words and globe scale with the badge's own width, like the official artwork: never wrapping (owner 2026-11-28) */
+.badge-web { container-type: inline-size; gap: 0; padding: 0; }
+.badge-web svg { width: 16cqw; height: 16cqw; flex: none; }
+.badge-web span { display: grid; gap: 1.5cqw; margin-left: 5cqw; font-size: 14cqw; line-height: 1; white-space: nowrap; }
 .m-only { display: none; }
 .web-line { margin: 14px 0 0; font-size: 16px; }
-.badge-web small { font: 400 12px/1 var(--body); letter-spacing: .01em; }
+.badge-web small { font: 400 6.8cqw/1 var(--body); letter-spacing: .01em; }
 .web-link { font-weight: 700; text-underline-offset: 4px; }
 
 /* ── the scenes ── */
@@ -356,6 +358,8 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 
 /* ── iPad upright and small laptops: two columns down to 720 px ── */
 @media (max-width: 1099px) { .flip .copy, .flip .detail { padding-left: 0; } }
+/* the opening's column is narrow here: two badges in a row and the browser badge under them, so none gets tiny */
+@media (max-width: 1099px) and (min-width: 720px) { .hero .stores { grid-template-columns: repeat(2, minmax(0, 180px)); } .hero .stores .badge-web { grid-column: 1 / -1; width: calc(50% - 6px); } }
 @media (max-width: 899px) { .scene { --ph: clamp(520px, calc(100svh - 64px), 700px); } .head { font-size: clamp(36px, 5.6vw, 54px); } }
 
 /* ── phones: copy, then the phone, then the detail line ── */
@@ -384,7 +388,6 @@ footer nav a { font-weight: 700; padding: 6px 0; }
   .hero .stage { order: 4; height: var(--ph); margin-top: 26px; }
   .hero .stores { order: 5; margin-top: 34px; gap: 10px; }
   .hero .free-line { order: 7; margin: 10px 0 48px; font-size: 14px; font-weight: 400; }
-  .badge-web { font-size: 19px; padding: 0 10px; gap: 8px; } .badge-web svg { width: 24px; height: 24px; } .badge-web small { font-size: 10px; }
   .twice { grid-template-columns: 1fr; }
   .get-grid { grid-template-columns: 1fr; grid-template-areas: "text" "fam" "act"; }
   .get-act { margin-top: 0; }
