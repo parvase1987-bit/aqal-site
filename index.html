@@ -647,6 +647,7 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ── settle in, pop cards, timed phone rise: each once, as it comes into view ──
 const once = (sel, threshold) => {
+  if (!("IntersectionObserver" in window)) { document.querySelectorAll(sel).forEach((el) => el.classList.add("in")); return; }
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold });
   document.querySelectorAll(sel).forEach((el) => io.observe(el));
 };
@@ -658,11 +659,12 @@ setTimeout(() => document.querySelectorAll(".hero, .hero .settle").forEach((el) 
 // ── scene 2: the Reader goes round the words, right to left, while the card is on screen (owner 2026-11-28) ──
 (function () {
   const card = document.getElementById("reader"), big = document.getElementById("bigm");
-  if (!card || reduce) return;
+  if (!card || reduce || !("IntersectionObserver" in window)) return;
   const wds = [...card.querySelectorAll(".wd")]; let i = 0, t = null;
   let held = false;
-  ["mouseenter", "focusin"].forEach((ev) => card.addEventListener(ev, () => { held = true; }));
-  ["mouseleave", "focusout"].forEach((ev) => card.addEventListener(ev, () => { held = false; }));
+  card.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") held = true; });
+  card.addEventListener("pointerleave", () => { held = false; });
+  card.addEventListener("focusin", () => { held = true; }); card.addEventListener("focusout", () => { held = false; });
   const step = () => { if (held) return; wds.forEach((w, k) => w.classList.toggle("on", k === i)); big.style.opacity = 0;
     setTimeout(() => { const w = wds[i]; big.replaceChildren();
       const m = w.querySelector("small").textContent;
@@ -674,16 +676,17 @@ setTimeout(() => document.querySelectorAll(".hero, .hero .settle").forEach((el) 
 // ── the phones: someone using the app, three screens, then again (owner 2026-11-28). Plays only while the phone is
 //    on screen, one at a time; nothing to press. With reduced motion the first screen stays still.
 (function () {
-  if (reduce) return;
-  const vids = [...document.querySelectorAll(".phone video")];
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    const v = e.target;
-    if (e.isIntersecting && e.intersectionRatio > 0.5) {
-      if (!v.src) v.src = v.dataset.src;
-      vids.forEach((o) => { if (o !== v) o.pause(); });
-      v.play().catch(() => {});
-    } else v.pause();
-  }), { threshold: [0, 0.5, 1] });
+  if (reduce || !("IntersectionObserver" in window)) return;
+  const vids = [...document.querySelectorAll(".phone video")], seen = new Map();
+  const need = (v) => (v.closest(".hero") ? 0.25 : 0.5); // the opening phone is tall and starts low on short phones
+  const play = (v) => { if (!v.src) v.src = v.dataset.src; vids.forEach((o) => { if (o !== v) o.pause(); }); v.play().catch(() => {}); };
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => seen.set(e.target, e.isIntersecting ? e.intersectionRatio : 0));
+    const ok = vids.filter((v) => (seen.get(v) || 0) >= need(v));
+    if (!ok.length) { vids.forEach((v) => v.pause()); return; }
+    const best = ok.reduce((x, y) => ((seen.get(y) || 0) > (seen.get(x) || 0) ? y : x));
+    if (best.paused) play(best);
+  }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
   vids.forEach((v) => io.observe(v));
 })();
 
@@ -693,7 +696,8 @@ const ros = document.getElementById("rosette");
 ros.innerHTML = DAWN.map((_, i) => `<ellipse class="p" cx="0" cy="-10.5" rx="5" ry="8.5" transform="rotate(${(360 / 7) * i})"/>`).join("") + `<circle class="c" r="4.6"/>`;
 const petals = [...ros.querySelectorAll(".p")];
 const fnav = document.getElementById("fnav"), where = document.getElementById("where"), heroStores = document.getElementById("hero-stores");
-new IntersectionObserver((es) => fnav.classList.toggle("on", !es[0].isIntersecting && es[0].boundingClientRect.top < 0)).observe(heroStores);
+const hasIO = "IntersectionObserver" in window; // without it the floating menu simply stays hidden
+if (hasIO) new IntersectionObserver((es) => fnav.classList.toggle("on", !es[0].isIntersecting && es[0].boundingClientRect.top < 0)).observe(heroStores);
 let reached = 0, done = false;
 const fill = (n) => {
   for (let i = 0; i < 7; i++) petals[i].style.fill = i < Math.min(n, 7) ? DAWN[i] : "";
@@ -705,14 +709,14 @@ const fill = (n) => {
     }
   }
 };
-const obsName = new IntersectionObserver((es) => es.forEach((e) => {
+const obsName = hasIO && new IntersectionObserver((es) => es.forEach((e) => {
   if (!e.isIntersecting) return;
   where.textContent = e.target.dataset.name;
   fnav.classList.toggle("away", ["get", "plans", "end"].includes(e.target.id)); // never "Get Aqal" twice, never over the store buttons
   const p = Number(e.target.dataset.petal || 0);
   if (p > reached) { reached = p; fill(p); }
 }), { rootMargin: "-45% 0px -45% 0px" });
-document.querySelectorAll("[data-name]").forEach((el) => obsName.observe(el));
+if (obsName) document.querySelectorAll("[data-name]").forEach((el) => obsName.observe(el));
 </script>
 </body>
 </html>
