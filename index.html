@@ -386,7 +386,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
 /* ── iPad upright and small laptops: two columns down to 720 px ── */
 @media (max-width: 1099px) { .flip .copy, .flip .detail { padding-left: 0; } }
 /* the opening's column is narrow here: two badges in a row and the browser badge under them, so none gets tiny */
-@media (max-width: 1099px) and (min-width: 720px) { .hero .stores { grid-template-columns: repeat(2, minmax(0, 180px)); } .hero .stores .badge-web { grid-column: 1 / -1; width: calc(50% - 6px); } }
+@media (max-width: 1099px) and (min-width: 720px) { .hero .stores, .get .stores { grid-template-columns: repeat(2, minmax(0, 180px)); } .hero .stores .badge-web, .get .stores .badge-web { grid-column: 1 / -1; width: calc(50% - 6px); } }
 @media (max-width: 899px) { .scene { --ph: clamp(520px, calc(100svh - 64px), 700px); } .head { font-size: clamp(36px, 5.6vw, 54px); } }
 
 /* ── phones: copy, then the phone, then the detail line ── */
@@ -419,6 +419,7 @@ footer nav a { font-weight: 700; padding: 6px 0; }
   .get-grid { grid-template-columns: 1fr; grid-template-areas: "text" "fam" "act"; }
   .get-act { margin-top: 0; }
   .family { height: 330px; margin: 30px 0 26px; }
+  @media (max-width: 359px) { .family { transform: scale(.88); } }
   .family .tab { width: 210px; right: auto; left: calc(50% - 60px); } .family .fph { width: 140px; right: auto; left: calc(50% - 150px); top: 40px; }
   /* the opening phone turns on its middle here (see .phone above), so it swings less */
   @media (prefers-reduced-motion: no-preference) { .js .hero .lift { rotate: calc(var(--sw, 0) * -9deg); transform-origin: 50% 50%; } }
@@ -700,7 +701,8 @@ const once = (sel) => {
   // plays every time (owner 2026-11-28): shows once its top passes a line 20% up from the bottom of the screen (works for a
   // part of any height, unlike a share-of-the-part threshold), and resets only once it is fully off screen
   const show = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in"); }), { rootMargin: "0px 0px -20% 0px" });
-  const hide = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) e.target.classList.remove("in"); }));
+  const hide = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting && e.target.getClientRects().length) e.target.classList.remove("in"); }));
+  // (a part with no box of its own, like the opening text on phones, is never "off screen": live hotfix 28 Nov)
   document.querySelectorAll(sel).forEach((el) => { show.observe(el); hide.observe(el); });
 };
 once(".settle, .hero, #twice, .get");
